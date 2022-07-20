@@ -1,3 +1,16 @@
-import express from 'express';
+import express, { NextFunction, Request, Response } from 'express';
+import Vehicle from '../../models/vehicle';
+import Review from '../../models/review';
+import connect from '../../models/connect';
 
-const router = express.Router();
+const last5 = async (request: Request, response: Response, next: NextFunction) => {
+    console.log('This is the last5 route');
+    await connect();
+    const limit = request.body.limit ? request.body.limit : 5;
+    const vehicle = await Vehicle.findById({ _id: request.body.vehicleId });
+    const reviews = await Review.find({ vehicleId: request.body.vehicleId }).sort({ createdAt: -1 }).limit(limit);
+
+    return response.status(200).json({ message: 'The last5 route was pinged', vehicle: vehicle, reviews: reviews });
+};
+
+export default last5;
