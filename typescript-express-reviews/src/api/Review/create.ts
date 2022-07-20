@@ -1,9 +1,9 @@
-import express, { NextFunction, Request, Response } from 'express';
+import express, { Request, Response } from 'express';
 import Review from '../../models/review';
 import Vehicle from '../../models/vehicle';
 import connect from '../../models/connect';
 
-const create = async (request: Request, response: Response, next: NextFunction) => {
+const create = async function (request: Request, response: Response) {
     console.log('This is the create review route');
     await connect();
     const review = await Review.create({
