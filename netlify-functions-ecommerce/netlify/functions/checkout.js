@@ -33,8 +33,8 @@ const handler = async(event) => {
     const session = await stripe.checkout.sessions.create({
       line_items: stripeProducts.line_items,
       mode: 'payment',
-      success_url: config.success_url,
-      cancel_url: config.cancel_url
+      success_url: config.stripeSuccessUrl,
+      cancel_url: config.stripeCancelUrl
     });
     const intent = await stripe.paymentIntents.retrieve(session.payment_intent);
     if (intent.status !== 'succeeded') {
