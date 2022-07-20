@@ -10,13 +10,21 @@ const handler = async(event) => {
     const products = await Product.find();
     if (event.body.cartId) {
       // get the document containing the specified cartId
-      const cart = await Cart.findOne({ _id: event.body.cartId }).setOptions({ sanitizeFilter: true });
+      const cart = await Cart.
+        findOne({ _id: event.body.cartId }).
+        setOptions({ sanitizeFilter: true });
       
       if (cart == null) {
-        return { statusCode: 404, body: JSON.stringify({ message: 'Cart not found' }) };
+        return {
+          statusCode: 404,
+          body: JSON.stringify({ message: 'Cart not found' })
+        };
       }
       if(!Array.isArray(event.body.items)) {
-        return { statusCode: 500, body: JSON.stringify({ error: 'items is not an array' }) };
+        return {
+          statusCode: 400,
+          body: JSON.stringify({ error: 'items is not an array' })
+        };
       }
       for (const product of event.body.items) {
         const exists = cart.items.find(item => item?.productId?.toString() === product?.productId?.toString());

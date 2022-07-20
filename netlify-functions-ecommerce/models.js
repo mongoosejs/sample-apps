@@ -12,11 +12,11 @@ const Product = mongoose.model('Product', productSchema);
 module.exports.Product = Product;
 
 const orderSchema = new mongoose.Schema({
-  items: [
-    { productId: { type: mongoose.ObjectId, required: true, ref: 'Product' },
-      quantity: { type: Number, required: true, validate: v => v > 0 }
-    }
-  ],
+  items: [{
+    _id: false,
+    productId: { type: mongoose.ObjectId, required: true, ref: 'Product' },
+    quantity: { type: Number, required: true, validate: v => v > 0 }
+  }],
   total: {
     type: Number,
     default: 0
@@ -74,7 +74,11 @@ const Order = mongoose.model('Order', orderSchema);
 module.exports.Order = Order;
 
 const cartSchema = new mongoose.Schema({
-  items: [{ productId: { type: mongoose.ObjectId, required: true, ref: 'Product' }, quantity: { type: Number, required: true } }],
+  items: [{
+    _id: false,
+    productId: { type: mongoose.ObjectId, required: true, ref: 'Product' },
+    quantity: { type: Number, required: true }
+  }],
   orderId: { type: mongoose.ObjectId, ref: 'Order' }
 }, { timestamps: true });
 

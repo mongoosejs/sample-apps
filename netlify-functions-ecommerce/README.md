@@ -1,4 +1,4 @@
-# ecommerce-netlify-functions
+# netlify-functions-ecommerce
 
 This sample demonstrates using Mongoose to build an eCommerce shopping cart using [Netlify Functions](https://www.netlify.com/products/functions/), which runs on [AWS Lambda](https://mongoosejs.com/docs/lambda.html).
 
@@ -14,6 +14,7 @@ Other tools include:
 3. Run `npm run seed`
 4. Run `npm start`
 5. Visit `http://localhost:8888/.netlify/functions/getProducts` to list all available products
+6. Run `npm run test:smoke` to run a smoke test against `http://localhost:8888` that creates a cart using [Axios](https://masteringjs.io/axios).
 6. Run other endpoints using curl or postman
 
 ## Testing
