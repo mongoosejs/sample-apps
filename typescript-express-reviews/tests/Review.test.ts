@@ -43,7 +43,6 @@ describe('Review', function() {
     const req = mockRequest({ vehicleId: vehicle._id, userId: user._id, rating: 4, text: 'The length of this text must be greater than 30 to pass validation.'});
     const res = mockResponse();
     await create(req, res);
-    console.log(res.json.getCall(0).args[0]);
     assert(res.json.getCall(0).args[0].message);
     assert(res.json.getCall(0).args[0].review);
     assert.equal(res.json.getCall(0).args[0].review.rating, 4);
