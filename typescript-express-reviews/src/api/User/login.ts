@@ -5,7 +5,6 @@ import connect from '../../models/connect';
 const bcrypt = require('bcryptjs');
 
 const login = async function (request: Request, response: Response) {
-    console.log('This is the login route');
     await connect();
     const user = await User.findOne({ email: request.body.email}).setOptions({ sanitizeFilter: true, strict: 'throw' });
     if (user == null) {
