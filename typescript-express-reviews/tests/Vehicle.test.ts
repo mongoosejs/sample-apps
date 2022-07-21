@@ -41,14 +41,14 @@ describe('Vehicle', function() {
         averageReview: 0
       },
     );
-    await Review.create([
-      {rating: 1, text: 'This is a review that must have a greater length than 30. Oldest', vehicleId: vehicle._id, userId: user._id},
-      {rating: 2, text: 'This is a review that must have a greater length than 30.', vehicleId: vehicle._id, userId: user._id},
-      {rating: 3, text: 'This is a review that must have a greater length than 30.', vehicleId: vehicle._id, userId: user._id},
-      {rating: 4, text: 'This is a review that must have a greater length than 30.', vehicleId: vehicle._id, userId: user._id},
-      {rating: 5, text: 'This is a review that must have a greater length than 30.', vehicleId: vehicle._id, userId: user._id},
-      {rating: 5, text: 'This is a review that must have a greater length than 30. Newest', vehicleId: vehicle._id, userId: user._id}
-    ]);
+    for (let i = 1; i < 7; i++) {
+      await Review.create({
+        rating: i > 5 ? 5 : i, 
+        text: 'This is a review that must have length greater than 30. ' + i, 
+        vehicleId: vehicle._id,
+        userId: user._id
+      });
+    }
     vehicle.numReviews = 5;
     vehicle.averageReview = 3;
     await vehicle.save();
@@ -58,6 +58,6 @@ describe('Vehicle', function() {
     assert(res.json.getCall(0).args[0].message);
     assert(res.json.getCall(0).args[0].vehicle);
     assert.equal(res.json.getCall(0).args[0].reviews.length, 5);
-    assert(!res.json.getCall(0).args[0].reviews.find((entry) => entry.text.endsWith('Oldest')));
+    assert(res.json.getCall(0).args[0].reviews[0].text.endsWith('6'));
   });
 });
