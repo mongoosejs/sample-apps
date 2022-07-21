@@ -4,7 +4,6 @@ import Review from '../../models/review';
 import connect from '../../models/connect';
 
 const last5 = async function (request: Request, response: Response) {
-    console.log('This is the last5 route');
     await connect();
     const limit = request.body.limit ? request.body.limit : 5;
     const vehicle = await Vehicle.findById({ _id: request.body.vehicleId });
