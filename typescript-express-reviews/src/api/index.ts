@@ -7,7 +7,7 @@ void async function main() {
 
   app.get('/status', function(req: express.Request, res: express.Response) {
     res.json({ ok: 1 });
-  })
+  });
 
   await app.listen(port);
   console.log('Listening on port ' + port);

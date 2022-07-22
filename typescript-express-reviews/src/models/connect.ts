@@ -6,6 +6,6 @@ if (process.env.MONGODB_CONNECTION_STRING == null) {
 
 export default async function connect() {
   await mongoose.connect(process.env.MONGODB_CONNECTION_STRING);
-};
+}
 
 

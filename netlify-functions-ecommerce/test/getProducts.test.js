@@ -1,10 +1,9 @@
 'use strict';
 
-const { describe, it, before, after } = require('mocha');
+const { describe, it } = require('mocha');
 const assert = require('assert');
 const { handler: getProducts } = require('../netlify/functions/getProducts');
 const fixtures = require('./fixtures');
-const mongoose = require('mongoose');
 
 describe('Products', function() {
   it('Should get all products.', async function() {

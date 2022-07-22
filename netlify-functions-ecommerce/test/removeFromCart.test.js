@@ -1,10 +1,9 @@
 'use strict';
 
-const { describe, it, before, after } = require('mocha');
+const { describe, it } = require('mocha');
 const assert = require('assert');
 const { handler: addToCart } = require('../netlify/functions/addToCart');
 const { handler: removeFromCart } = require('../netlify/functions/removeFromCart');
-const mongoose = require('mongoose');
 const fixtures = require('./fixtures');
 
 describe('Remove From Cart', function() {
@@ -33,7 +32,7 @@ describe('Remove From Cart', function() {
       body: {
         cartId: result.body._id,
         item: {
-          productId: products[0]._id,
+          productId: products[0]._id
         }
       }
     };
@@ -44,8 +43,8 @@ describe('Remove From Cart', function() {
   });
 
   it('Should create a cart and then it should reduce the quantity of an item from it.', async function() {
-    const products = await fixtures.createProducts({product: [{ productName: 'A Test Products', productPrice: 500 }, {productName: 'Another Test Product', productPrice: 600 }]})
-    .then((res) => res.products);
+    const products = await fixtures.createProducts({ product: [{ productName: 'A Test Products', productPrice: 500 }, { productName: 'Another Test Product', productPrice: 600 }] })
+      .then((res) => res.products);
     const params = {
       body: {
         cartId: null,
