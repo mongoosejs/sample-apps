@@ -19,7 +19,7 @@ const schema = new mongoose.Schema({
     type: 'ObjectId',
     required: true
   }
-});
+}, { timestamps: true });
 
 schema.virtual('user', {
   ref: 'User',
