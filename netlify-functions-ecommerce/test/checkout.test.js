@@ -1,10 +1,9 @@
 'use strict';
 
-const { describe, it, before, after } = require('mocha');
+const { describe, it } = require('mocha');
 const assert = require('assert');
 const { handler: addToCart } = require('../netlify/functions/addToCart');
 const { handler: checkout } = require('../netlify/functions/checkout');
-const mongoose = require('mongoose');
 const fixtures = require('./fixtures');
 const sinon = require('sinon');
 const stripe = require('../integrations/stripe');
