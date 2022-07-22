@@ -3,6 +3,7 @@
   "description": "Mongoose vehicle review sample app with TypeScript and Express",
   "authors": "Valeri Karpov <val@karpov.io>",
   "version": "1.0.0",
+  "license": "MIT",
   "scripts": {
     "build": "tsc",
     "start": "ts-node src/api",
