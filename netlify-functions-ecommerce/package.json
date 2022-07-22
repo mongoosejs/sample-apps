@@ -1,4 +1,7 @@
 {
+  "name": "@mongoosejs/netlify-functions-ecommerce",
+  "version": "1.0.0",
+  "license": "MIT",
   "dependencies": {
     "mongoose": "6.3.5",
     "sinon": "14.0.0",

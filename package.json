@@ -1,0 +1,15 @@
+{
+  "name": "@mongoosejs/sample-apps",
+  "private": true,
+  "version": "0.0.0",
+  "license": "MIT",
+  "workspaces": [
+    "netlify-functions-ecommerce",
+    "typescript-express-reviews"
+  ],
+  "scripts": {
+  },
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  }
+}
