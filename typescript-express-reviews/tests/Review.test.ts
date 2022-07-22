@@ -5,21 +5,22 @@ import sinon from 'sinon';
 import create from '../src/api/Review/create';
 import Vehicle from '../src/models/vehicle';
 import User from '../src/models/user';
-import mongoose from 'mongoose';
+
+interface ResponseStub {
+  status: sinon.SinonStub;
+  json: sinon.SinonStub;
+}
 
 describe('Review', function() {
-  before(async () => {
-    await mongoose.connect('mongodb://localhost:27017/vehicle-review');
-    await mongoose.connection.dropDatabase();
-  })
   it('should create a review', async function() {
     const mockRequest = (body) => ({
       body
     })
-    const mockResponse = () => {
-      const res = {};
-      res.status = sinon.stub().returns(res);
-      res.json = sinon.stub().returns(res);
+    const mockResponse = (): ResponseStub => {
+      const res: ResponseStub = {
+        status: sinon.stub().returnsThis(),
+        json: sinon.stub().returnsThis()
+      };
       return res;
     };
     const user = await User.create({
@@ -43,7 +44,6 @@ describe('Review', function() {
     const req = mockRequest({ vehicleId: vehicle._id, userId: user._id, rating: 4, text: 'The length of this text must be greater than 30 to pass validation.'});
     const res = mockResponse();
     await create(req, res);
-    assert(res.json.getCall(0).args[0].message);
     assert(res.json.getCall(0).args[0].review);
     assert.equal(res.json.getCall(0).args[0].review.rating, 4);
     assert.equal(res.json.getCall(0).args[0].review.text, 'The length of this text must be greater than 30 to pass validation.');

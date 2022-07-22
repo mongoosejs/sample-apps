@@ -5,7 +5,7 @@
   "license": "MIT",
   "workspaces": [
     "netlify-functions-ecommerce",
-    "typescript-express-reviews"
+    "@mongoosejs/typescript-express-reviews"
   ],
   "scripts": {
     "lint": "eslint ."

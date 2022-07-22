@@ -1,26 +1,27 @@
 
-import {describe, it, before } from 'mocha';
-import last5 from '../src/api/vehicle/findById';
-import assert from 'assert';
-import mongoose from 'mongoose';
-import sinon from 'sinon';
 import Vehicle from '../src/models/vehicle';
 import Review from '../src/models/review';
 import User from '../src/models/user';
+import {describe, it } from 'mocha';
+import last5 from '../src/api/Vehicle/findById';
+import assert from 'assert';
+import sinon from 'sinon';
+
+interface ResponseStub {
+  status: sinon.SinonStub;
+  json: sinon.SinonStub;
+}
 
 describe('Vehicle', function() {
-  before(async () => {
-    await mongoose.connect('mongodb://localhost:27017/vehicle-review');
-    await mongoose.connection.dropDatabase();
-  });
   it('should find a vehicle with its last 5 reviews', async function() {
     const mockRequest = (body) => ({
       body
     })
-    const mockResponse = () => {
-      const res = {};
-      res.status = sinon.stub().returns(res);
-      res.json = sinon.stub().returns(res);
+    const mockResponse = (): ResponseStub => {
+      const res: ResponseStub = {
+        status: sinon.stub().returnsThis(),
+        json: sinon.stub().returnsThis()
+      };
       return res;
     };
     const user = await User.create({
@@ -55,7 +56,6 @@ describe('Vehicle', function() {
     const req = mockRequest({ vehicleId: vehicle._id, limit: 5});
     const res = mockResponse();
     await last5(req, res);
-    assert(res.json.getCall(0).args[0].message);
     assert(res.json.getCall(0).args[0].vehicle);
     assert.equal(res.json.getCall(0).args[0].reviews.length, 5);
     assert(res.json.getCall(0).args[0].reviews[0].text.endsWith('6'));

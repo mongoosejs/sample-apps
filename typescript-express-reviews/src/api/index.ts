@@ -4,12 +4,14 @@ import login from './User/login';
 import create from './Review/create';
 import last5 from './Vehicle/findById';
 import bodyParser from 'body-parser';
-
+import connect from '../models/connect';
 
 const port = process.env.PORT || 3000;
 
 void async function main() {
   const app = express();
+
+  await connect();
 
   app.use(bodyParser.json());
   app.get('/status', function(req: express.Request, res: express.Response) {
