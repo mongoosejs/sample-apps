@@ -15,14 +15,14 @@ Other tools include:
 4. Run `npm start`
 5. Visit `http://localhost:8888/.netlify/functions/getProducts` to list all available products
 6. Run `npm run test:smoke` to run a smoke test against `http://localhost:8888` that creates a cart using [Axios](https://masteringjs.io/axios).
-6. Run other endpoints using curl or postman
+7. Run other endpoints using curl or postman
 
 ## Testing
 
 Make sure you have a MongoDB instance running on `localhost:27017`, or update `mongodbUri` in `.config/test.js` to your MongoDB server's address.
 Then run `npm test`.
 
-```
+```sh
 $ npm test
 
 > test
