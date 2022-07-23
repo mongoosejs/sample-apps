@@ -1,12 +1,15 @@
 'use strict';
 
 const { after } = require('mocha');
-const config = require('../.config');
+const connect = require('../connect');
 const mongoose = require('mongoose');
 
-before(async() => {
-  await mongoose.connect(config.mongodbUri);
+before(async function() {
+  this.timeout(10000);
+  await connect();
   await mongoose.connection.dropDatabase();
+
+  await mongoose.model('Order').init();
 });
 
 after(async function() {

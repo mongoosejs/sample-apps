@@ -4,8 +4,11 @@ const { describe, it } = require('mocha');
 const assert = require('assert');
 const { handler: addToCart } = require('../netlify/functions/addToCart');
 const fixtures = require('../test/fixtures');
+const mongoose = require('mongoose');
 
 describe('Add to Cart', function() {
+  this.timeout(10000);
+
   it('Should create a cart and add a product to the cart', async function() {
     const products = await fixtures.createProducts({
       product: [
@@ -28,6 +31,7 @@ describe('Add to Cart', function() {
     assert(result.body);
     assert(result.body.items.length);
   });
+
   it('Should find the cart and add to the cart', async function() {
     const products = await fixtures.createProducts({ product: [{ productName: 'A Test Products', productPrice: 500 }, { productName: 'Another Test Product', productPrice: 600 }] })
       .then((res) => res.products);
@@ -47,6 +51,7 @@ describe('Add to Cart', function() {
     assert(findCart.body);
     assert.equal(findCart.body.items.length, 2);
   });
+
   it('Should find the cart and increase the quantity of the item(s) in the cart', async function() {
     const products = await fixtures.createProducts({ product: [{ productName: 'A Test Products', productPrice: 500 }, { productName: 'Another Test Product', productPrice: 600 }] })
       .then((res) => res.products);
@@ -68,6 +73,7 @@ describe('Add to Cart', function() {
     assert.equal(findCart.body.items[0].quantity, 2);
     assert.equal(findCart.body.items[1].quantity, 1);
     params.body = JSON.stringify(params.body);
+
     const updateCart = await addToCart(params);
     updateCart.body = JSON.parse(updateCart.body);
     assert(updateCart.body);

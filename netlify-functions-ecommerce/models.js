@@ -1,5 +1,9 @@
 'use strict';
+
 const mongoose = require('mongoose');
+
+const { driver } = require('astra-mongoose');
+mongoose.setDriver(driver);
 
 const productSchema = new mongoose.Schema({
   name: String,

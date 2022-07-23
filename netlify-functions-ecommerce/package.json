@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
-    "mongoose": "6.3.5",
+    "astra-mongoose": "file:../astra-mongoose/astra-mongoose-0.0.3.tgz",
+    "mongoose": "6.4.x",
     "sinon": "14.0.0",
     "stripe": "9.6.0"
   },

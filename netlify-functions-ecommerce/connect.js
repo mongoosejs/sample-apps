@@ -10,6 +10,6 @@ module.exports = async function connect() {
     return conn;
   }
   conn = mongoose.connection;
-  await mongoose.connect(config.mongodbUri);
+  await mongoose.connect(config.astraUri);
   return conn;
 };

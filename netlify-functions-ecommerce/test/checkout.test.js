@@ -9,6 +9,8 @@ const sinon = require('sinon');
 const stripe = require('../integrations/stripe');
 
 describe('Checkout', function() {
+  this.timeout(10000);
+
   it('Should do a successful checkout run', async function() {
     const products = await fixtures.createProducts({
       product: [
@@ -30,6 +32,7 @@ describe('Checkout', function() {
     result.body = JSON.parse(result.body);
     assert(result.body);
     assert(result.body.items.length);
+
     params.body.cartId = result.body._id;
     sinon.stub(stripe.paymentIntents, 'retrieve').returns({ status: 'succeeded', id: '123', brand: 'visa', last4: '1234' });
     sinon.stub(stripe.paymentMethods, 'retrieve').returns({ status: 'succeeded', id: '123', brand: 'visa', last4: '1234' });
@@ -43,7 +46,9 @@ describe('Checkout', function() {
     params.body.zip = '33145';
     params.body.shipping = 'standard';
     params.body = JSON.stringify(params.body);
+
     const finish = await checkout(params);
+    console.log(finish.body);
     finish.body = JSON.parse(finish.body);
     assert(finish.body.order);
     assert(finish.body.cart);

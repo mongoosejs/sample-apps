@@ -30,12 +30,12 @@ const handler = async(event) => {
         const exists = cart.items.find(item => item?.productId?.toString() === product?.productId?.toString());
         if (!exists && products.find(p => product?.productId?.toString() === p?._id?.toString())) {
           cart.items.push(product);
-          await cart.save();
         } else {
           exists.quantity += product.quantity;
-          await cart.save();
         }
       }
+
+      await cart.save();
 
       if (!cart.items.length) {
         return { statusCode: 200, body: JSON.stringify({ cart: null }) };
