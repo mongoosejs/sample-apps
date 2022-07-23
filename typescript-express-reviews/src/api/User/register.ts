@@ -21,6 +21,6 @@ async function register(request: Request, response: Response) {
     secret: hash
   });
   response.status(200).json({ user: user });
-};
+}
 
 export default register;
