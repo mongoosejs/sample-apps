@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import User from '../models/user';
 import Authentication from '../models/authentication';
 import Vehicle from '../models/vehicle';
-const bcrypt = require('bcryptjs');
+import bcrypt from 'bcryptjs';
 
 async function run() {
   await mongoose.connect('mongodb://localhost:27017/vehicle-reviews');
@@ -23,7 +23,7 @@ async function run() {
     await Authentication.create({
       type: 'password',
       userId: users[i]._id,
-      secret: await bcrypt.hash(users[i].firstName.toLowerCase())
+      secret: await bcrypt.hash(users[i].firstName.toLowerCase(), 10)
     });
   }
   const vehicles = await Vehicle.create([

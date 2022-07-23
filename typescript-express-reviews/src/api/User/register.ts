@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import Authentication from '../../models/authentication';
 import User from '../../models/user';
-const bcrypt = require('bcryptjs');
+import bcrypt from 'bcryptjs';
 
 async function register(request: Request, response: Response) {
   if (!request.body) return response.status(500).json({ error: 'No body was sent' });
