@@ -7,6 +7,8 @@ const { handler: removeFromCart } = require('../netlify/functions/removeFromCart
 const fixtures = require('./fixtures');
 
 describe('Remove From Cart', function() {
+  this.timeout(10000);
+
   it('Should create a cart and then it should remove the entire item from it.', async function() {
     const products = await fixtures.createProducts({
       product: [

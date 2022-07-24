@@ -48,7 +48,6 @@ describe('Checkout', function() {
     params.body = JSON.stringify(params.body);
 
     const finish = await checkout(params);
-    console.log(finish.body);
     finish.body = JSON.parse(finish.body);
     assert(finish.body.order);
     assert(finish.body.cart);
