@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: [18]
+        node: [16]
         os: [ubuntu-20.04]
     name: Node ${{ matrix.node }}
     steps:
