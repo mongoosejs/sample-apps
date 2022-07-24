@@ -1,12 +1,13 @@
 'use strict';
 
-const { Product } = require('../models');
 const { describe, it } = require('mocha');
 const assert = require('assert');
 const { handler: getProducts } = require('../netlify/functions/getProducts');
 const fixtures = require('./fixtures');
 
 describe('Products', function() {
+  this.timeout(10000);
+
   it('Should get all products.', async function() {
     await fixtures.createProducts({
       product: [
