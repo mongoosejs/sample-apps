@@ -3,10 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "license": "MIT",
-  "workspaces": [
-    "netlify-functions-ecommerce",
-    "@mongoosejs/typescript-express-reviews"
-  ],
   "scripts": {
     "lint": "eslint ."
   },

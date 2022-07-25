@@ -1,0 +1,30 @@
+.cart {
+  display: block;
+  padding: 0 25px;
+  height: 200px;
+  font-size: 64px;
+  line-height: 200px;
+  border-radius: 100px;
+  background-color: #f1f1f1;
+}
+
+.cart img {
+  float: left;
+  margin: 0 10px 0 -25px;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+}
+
+.cart-quantity {
+  float: right;
+  padding-right:50px;
+}
+
+.plus-minus {
+  padding-right: 10px;
+  padding-left: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+  background-color: grey;
+}
