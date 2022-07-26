@@ -18,14 +18,15 @@ const handler = async(event) => {
     if (intent.status !== 'succeeded') {
       throw new Error(`Order creation failed because intent has status "${intent.status}"`);
     }
-    console.log('This is the session', session);
     const exists = await Order.findOne({sessionId: session.id});
     if (exists) return { statusCode: 200, body: JSON.stringify({ message: 'Order already exists in database'})};
     const paymentMethod = await stripe.paymentMethods.retrieve(intent['payment_method']);
     const orders = await Order.find();
     const orderNumber = orders.length ? orders.length + 1 : 1;
+    let products = JSON.parse(session.metadata.products);
+    console.log('after parsing', products);
     const order = await Order.create({
-      items: event.body.product,
+      items: products,
       total: session.amount_total,
       orderNumber: orderNumber,
       name: session.customer_details.name,
@@ -41,6 +42,7 @@ const handler = async(event) => {
 
     cart.orderId = order._id;
     await cart.save();
+    await Cart.updateOne({_id: event.body.cartId}, {$set: {items: []}});
     return {
       statusCode: 200,
       body: JSON.stringify({ order: order, cart: cart, session: session }),

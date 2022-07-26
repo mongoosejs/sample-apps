@@ -15,6 +15,7 @@ const handler = async(event) => {
       orFail();
 
     const stripeProducts = { line_items: [] };
+    const productRecords = [];
     let total = 0;
     for (let i = 0; i < cart.items.length; i++) {
       const product = await Product.findOne({ _id: cart.items[i].productId });
@@ -28,6 +29,7 @@ const handler = async(event) => {
         },
         quantity: cart.items[i].quantity
       });
+      productRecords.push({productId: cart.items[i].productId, quantity: cart.items[i].quantity});
       total = total + (product.price * cart.items[i].quantity);
     }
     const session = await stripe.checkout.sessions.create({
@@ -36,7 +38,7 @@ const handler = async(event) => {
       shipping_address_collection: {
         allowed_countries: ['US', 'CA']
       },
-      metadata: {shippingType: event.body.shippingType},
+      metadata: {shippingType: event.body.shippingType, products: JSON.stringify(productRecords)},
       mode: 'payment',
       success_url: config.stripeSuccessUrl+'?id={CHECKOUT_SESSION_ID}',
       cancel_url: config.stripeCancelUrl
@@ -48,7 +50,6 @@ const handler = async(event) => {
       body: JSON.stringify({ session: session }),
     };
   } catch (error) {
-    console.log('what the fuck is the error', error)
     return { statusCode: 500, body: error.toString() };
   }
 };

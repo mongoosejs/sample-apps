@@ -10,16 +10,13 @@ export default {
   },
   methods: {
     async checkout() {
-      if (this.shipping == null) return;
-      const result = await fetch(`http://localhost:8888/.netlify/functions/checkout`, {
+      if (this.shipping == null || this.cart.length == 0) return;
+      await fetch(`http://localhost:8888/.netlify/functions/checkout`, {
         method: "POST",
         body: JSON.stringify({cartId: localStorage.getItem('cartId'), shippingType: this.shipping})
       }).then((res) => { return res.json()}).then((response) => {
-        console.log('the response', response);
-        console.log('stripe', Stripe);
         this.stripe.redirectToCheckout({sessionId: response.session.id})
       });
-      console.log(result);
     }
   },
   mounted: async function() {
@@ -43,7 +40,8 @@ export default {
     <title>Buy cool new product</title>
   </head>
   <body>
-    <section>
+  <h1 v-if="cart.length <= 0">Cannot Checkout as no items are in the cart.</h1>
+    <section v-else>
       <div v-for="item in cart" class="product">
         <img class="image" :src="item.image" alt="an iphone" />
         <div class="description">
