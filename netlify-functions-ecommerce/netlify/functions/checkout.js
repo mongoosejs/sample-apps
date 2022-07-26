@@ -32,39 +32,23 @@ const handler = async(event) => {
     }
     const session = await stripe.checkout.sessions.create({
       line_items: stripeProducts.line_items,
+      billing_address_collection: 'auto',
+      shipping_address_collection: {
+        allowed_countries: ['US', 'CA']
+      },
+      metadata: {shippingType: event.body.shippingType},
       mode: 'payment',
-      success_url: config.stripeSuccessUrl,
+      success_url: config.stripeSuccessUrl+'?id={CHECKOUT_SESSION_ID}',
       cancel_url: config.stripeCancelUrl
     });
-    const intent = await stripe.paymentIntents.retrieve(session.payment_intent);
-    if (intent.status !== 'succeeded') {
-      throw new Error(`Checkout failed because intent has status "${intent.status}"`);
-    }
-    const paymentMethod = await stripe.paymentMethods.retrieve(intent['payment_method']);
-    const orders = await Order.find();
-    const orderNumber = orders.length ? orders.length + 1 : 1;
-    const order = await Order.create({
-      items: event.body.product,
-      total: total,
-      orderNumber: orderNumber,
-      name: event.body.name,
-      email: event.body.email,
-      address1: event.body.address1,
-      city: event.body.city,
-      state: event.body.state,
-      zip: event.body.zip,
-      shipping: event.body.shipping,
-      paymentMethod: paymentMethod ? { id: paymentMethod.id, brand: paymentMethod.brand, last4: paymentMethod.last4 } : null
-    });
-
-    cart.orderId = order._id;
+    cart.checkoutSessionId = session.id;
     await cart.save();
     return {
       statusCode: 200,
-      body: JSON.stringify({ order: order, cart: cart }),
-      headers: { Location: session.url }
+      body: JSON.stringify({ session: session }),
     };
   } catch (error) {
+    console.log('what the fuck is the error', error)
     return { statusCode: 500, body: error.toString() };
   }
 };

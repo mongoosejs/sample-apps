@@ -66,6 +66,10 @@ const orderSchema = new mongoose.Schema({
     id: String,
     brand: String,
     last4: String
+  },
+  sessionId: {
+    type: String,
+    required: true
   }
 }, { optimisticConcurrency: true });
 
@@ -79,7 +83,8 @@ const cartSchema = new mongoose.Schema({
     productId: { type: mongoose.ObjectId, required: true, ref: 'Product' },
     quantity: { type: Number, required: true }
   }],
-  orderId: { type: mongoose.ObjectId, ref: 'Order' }
+  orderId: { type: mongoose.ObjectId, ref: 'Order' },
+  checkoutSessionId: String
 }, { timestamps: true });
 
 const Cart = mongoose.model('Cart', cartSchema);
