@@ -20,9 +20,6 @@ const handler = async(event) => {
           body: JSON.stringify({ message: 'Cart not found' })
         };
       }
-      if (!cart.items.length) {
-        return { statusCode: 200, body: JSON.stringify({ cart: null }) };
-      }
       if (!Array.isArray(event.body.items)) {
           const product = event.body.items
           const exists = cart.items.find(item => item?.productId?.toString() === product?.productId?.toString());

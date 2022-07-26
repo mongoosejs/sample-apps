@@ -5,6 +5,43 @@ export default {
       cart: [],
     }
   },
+  methods: {
+    // a simple solution to handle the weird rendering of the number on adding and removing is pass a temp copy to the backend instead of the original.
+    async removeAll(item) {
+      const updatedCart = await fetch('http://localhost:8888/.netlify/functions/removeFromCart', {
+        method: "POST",
+        body: JSON.stringify({cartId: localStorage.getItem('cartId'), item: item})
+      }).then((res) => res.json()).then((response) => response.items);
+      console.log('The updated Cart', updatedCart)
+      const index = updatedCart.findIndex((product) => product.productId == item.productId);
+      if (index < 0) {
+        let spot = this.cart.find((product) => product.productId == item.productId);
+        this.cart.splice(spot, 1);
+      }
+    },
+    async removeOne(item) {
+      item.quantity = 1;
+      const updatedCart = await fetch('http://localhost:8888/.netlify/functions/removeFromCart', {
+        method: "POST",
+        body: JSON.stringify({cartId: localStorage.getItem('cartId'), item: item})
+      }).then((res) => res.json()).then((response) => response.items);
+      console.log(updatedCart);
+      const updatedItem = updatedCart.find((product) => product.productId == item.productId);
+      item.quantity = updatedItem.quantity;
+    },
+    async addOne(item) {
+      item.quantity = 1;
+      const updatedCart = await fetch('http://localhost:8888/.netlify/functions/addToCart', {
+        method: "POST",
+        body: JSON.stringify({cartId: localStorage.getItem('cartId'), items: item})
+      }).then((res) => res.json()).then(response => response.items);
+      const updatedItem = updatedCart.find((product) => product.productId == item.productId);
+      item.quantity = updatedItem.quantity;
+    },
+    toCheckout() {
+      location.href = location.origin+'/Checkout/checkout.html';
+    }
+  },
   mounted: async function() {
     this.products = await fetch('http://localhost:8888/.netlify/functions/getProducts').then((res) => res.json());
     this.cart = await fetch(`http://localhost:8888/.netlify/functions/getCart?cartId=${localStorage.getItem('cartId')}`).then((res) => res.json()).then((response) => response.cart.items);
@@ -17,21 +54,19 @@ export default {
       this.cart[i].image = product.image;
       this.cart[i].price = product.price;
     }
-    console.log(this.cart);
+    console.log('The cart', this.cart);
   },
   template:
   `
   <div>
     <h1>Your Cart</h1>
+    <button @click="toCheckout()" class="checkout-button">Go To Checkout</button>
     <div v-for="item in cart" :key="item.productId">
       <h2 class="cart">{{item.name}}
-      <!--Do inline flex here maybe-->
-      <span class="cart-quantity"><span class="plus-minus">+</span>{{item.quantity}}<span class="plus-minus">&minus;</span></span>
-      <span style="float: right">Remove</span>
+      <span class="cart-quantity"><span @click="addOne(item)" class="plus-minus">+</span>{{item.quantity}}<span @click="removeOne(item)" class="plus-minus">&minus;</span><span @click="removeAll(item)" class="remove-button">Remove</span></span>
       <img :src="item.image" />
       </h2>
     </div>
-    <button>Go To Checkout</button>
   </div>
   `
 }

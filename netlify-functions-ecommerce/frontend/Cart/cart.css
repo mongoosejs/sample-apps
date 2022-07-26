@@ -28,3 +28,23 @@
   margin-left: 10px;
   background-color: grey;
 }
+.remove-button {
+  position: relative;
+  top: 50px;
+  font-size: X-large;
+  right: 50%;
+  cursor: pointer;
+  background-color: red;
+  padding: 10px;
+}
+
+.checkout-button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}

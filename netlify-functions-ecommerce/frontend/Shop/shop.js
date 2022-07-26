@@ -10,9 +10,10 @@ export default {
       location.href = location.origin+'/Cart/cart.html';
     },
     async addToCart(item) {
+      let cartId = localStorage.getItem('cartId');
       const newCart = await fetch('http://localhost:8888/.netlify/functions/addToCart', {
         method: "POST",
-        body: JSON.stringify({cartId: this.cart._id, items: { productId: item._id, quantity: 1 } })
+        body: JSON.stringify({cartId: cartId, items: { productId: item._id, quantity: 1 } })
       }).then((res) => res.json());
       console.log('Added to cart', newCart);
       if (!localStorage.getItem('cartId')) {
@@ -38,13 +39,19 @@ export default {
     } else {
       this.cart = await fetch('http://localhost:8888/.netlify/functions/getCart').then((res) => res.json());
     }
-    this.cart = this.cart.cart;
+    if (this.cart != null) {
+      this.cart = this.cart.cart;
+    }
     console.log('what is the cart', this.cart);
   },
   template: 
   `
   <div>
     <h1>Welcome to the Shop!</h1>
+    <div class="cart-link">
+      <h3>Your Cart has {{cartLength}} items.</h3>
+      <button class="cart-button" @click="viewCart()">View Cart</button>
+    </div>
     <div class="container">
       <div class="card" v-for="item in products" :key="item._id">
         <h2>{{item.name}}</h2>
@@ -53,8 +60,6 @@ export default {
         <button @click="addToCart(item)">Add to Cart</button>
       </div>
     </div>
-    <h3>Your Cart has {{cartLength}} items.</h3>
-    <button class="cart-button" @click="viewCart()">View Cart</button>
   </div>
   `
 };
