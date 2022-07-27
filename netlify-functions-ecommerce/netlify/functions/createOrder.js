@@ -47,7 +47,6 @@ const handler = async(event) => {
       body: JSON.stringify({ order: order, cart: cart, session: session }),
     };
   } catch (error) {
-    console.log('what the fuck is the error', error)
     return { statusCode: 500, body: error.toString() };
   }
 };
