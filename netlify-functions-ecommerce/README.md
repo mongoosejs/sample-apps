@@ -9,7 +9,7 @@ Other tools include:
 
 ## Running This Example
 
-1. Make sure you have a MongoDB instance running on `localhost:27017`, or update `mongodbUri` in `.config/development.js` to your MongoDB server's address.
+1. Set `ASTRA_URI` environment variable to point to your Astra instance
 2. Run `npm install`
 3. Run `npm run seed`
 4. Run `npm start`
