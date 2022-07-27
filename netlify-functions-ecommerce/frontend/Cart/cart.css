@@ -27,6 +27,7 @@
   margin-right: 10px;
   margin-left: 10px;
   background-color: grey;
+  cursor: pointer;
 }
 .remove-button {
   position: relative;
