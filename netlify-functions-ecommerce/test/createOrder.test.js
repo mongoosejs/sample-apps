@@ -30,8 +30,6 @@ describe('Create Order', function() {
     params.body = JSON.stringify(params.body);
     const result = await addToCart(params);
     result.body = JSON.parse(result.body);
-    console.log(result);
-    console.log(result.body.items)
     sinon.stub(stripe.checkout.sessions, 'retrieve').returns({
       status: 'succeeded', 
       id: '123', 
