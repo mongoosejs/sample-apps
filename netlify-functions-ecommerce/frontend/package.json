@@ -1,0 +1,13 @@
+{
+  "name": "@mongoosejs/netlify-functions-ecommerce",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "stripe": "9.6.0"
+  },
+  "devDependencies": {
+    "axios": "0.27.2",
+    "netlify-cli": "10.7.1"
+  },
+  "scripts": {}
+}

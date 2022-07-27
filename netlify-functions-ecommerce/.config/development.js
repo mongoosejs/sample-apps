@@ -2,7 +2,7 @@
 
 module.exports = Object.freeze({
   mongodbUri: 'mongodb://localhost:27017/ecommerce',
-  stripeSecretKey: 'YOUR STRIPE KEY HERE',
-  stripeSuccessUrl: 'localhost:3000/success',
-  stripeCancelUrl: 'localhost:3000/cancel'
+  stripeSecretKey: 'sk_test_51IkuAqIFSwo5WpGWnvqNvPP2sP7ESGuV8d9QQxYaM3oGdJa8JCyuFV1vTiLzZcIlpTKkk1SxRp39XifgjLhjQH46005KTEKpqF',
+  stripeSuccessUrl: 'http://localhost:5000/Confirmation/confirmation',
+  stripeCancelUrl: 'http://localhost:5000/Confirmation/confirmation'
 });

@@ -12,7 +12,7 @@ const handler = async(event) => {
       item.productId.toString() == event.body.item.productId.toString()
     );
     if (index == -1) {
-      return { statusCode: 200, body: cart };
+      return { statusCode: 200, body: JSON.stringify(cart) };
     }
     if (event.body?.item?.quantity) {
       cart.items[index].quantity -= event.body.item.quantity;
@@ -26,7 +26,6 @@ const handler = async(event) => {
     }
     return { statusCode: 200, body: JSON.stringify(cart) };
   } catch (error) {
-    console.log(error);
     return { statusCode: 500, body: error.toString() };
   }
 };

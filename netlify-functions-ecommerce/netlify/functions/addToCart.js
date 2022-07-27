@@ -21,24 +21,26 @@ const handler = async(event) => {
         };
       }
       if (!Array.isArray(event.body.items)) {
-        return {
-          statusCode: 400,
-          body: JSON.stringify({ error: 'items is not an array' })
-        };
-      }
-      for (const product of event.body.items) {
-        const exists = cart.items.find(item => item?.productId?.toString() === product?.productId?.toString());
-        if (!exists && products.find(p => product?.productId?.toString() === p?._id?.toString())) {
-          cart.items.push(product);
-          await cart.save();
-        } else {
-          exists.quantity += product.quantity;
-          await cart.save();
+          const product = event.body.items
+          const exists = cart.items.find(item => item?.productId?.toString() === product?.productId?.toString());
+          if (!exists && products.find(p => product?.productId?.toString() === p?._id?.toString())) {
+            cart.items.push(product);
+            await cart.save();
+          } else {
+            exists.quantity += product.quantity;
+            await cart.save();
+          }
+      } else {
+        for (const product of event.body.items) {
+          const exists = cart.items.find(item => item?.productId?.toString() === product?.productId?.toString());
+          if (!exists && products.find(p => product?.productId?.toString() === p?._id?.toString())) {
+            cart.items.push(product);
+            await cart.save();
+          } else {
+            exists.quantity += product.quantity;
+            await cart.save();
+          }
         }
-      }
-
-      if (!cart.items.length) {
-        return { statusCode: 200, body: JSON.stringify({ cart: null }) };
       }
 
       await cart.save();
