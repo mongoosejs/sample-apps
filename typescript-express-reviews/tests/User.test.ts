@@ -1,6 +1,6 @@
 import Authentication from '../src/models/authentication';
 import User from '../src/models/user';
-import {describe, it } from 'mocha';
+import { describe, it } from 'mocha';
 import register from '../src/api/User/register';
 import login from '../src/api/User/login';
 import assert from 'assert';

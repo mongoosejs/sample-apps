@@ -1,9 +1,9 @@
 import express, { Request, Response } from 'express';
 import Authentication from '../../models/authentication';
 import User from '../../models/user';
-const bcrypt = require('bcryptjs');
+import bcrypt from 'bcryptjs';
 
-async function login (request: Request, response: Response) {
+async function login(request: Request, response: Response) {
   const user = await User
     .findOne({ email: request.body.email })
     .setOptions({ sanitizeFilter: true });
@@ -13,7 +13,7 @@ async function login (request: Request, response: Response) {
   if (request.body.password == null) {
     return response.status(400).json({ error: 'no password specified' });
   }
-  
+
   const authentication = await Authentication.findOne({
     type: 'password',
     userId: user._id
@@ -32,6 +32,6 @@ async function login (request: Request, response: Response) {
   }
 
   return response.status(200).json({ user: user });
-};
+}
 
 export default login;
