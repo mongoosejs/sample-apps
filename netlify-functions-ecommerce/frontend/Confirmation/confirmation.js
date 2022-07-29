@@ -1,3 +1,4 @@
+const serverUrl = 'http://localhost:8888/.netlify/functions';
 
 export default {
   data: function() {
@@ -8,7 +9,7 @@ export default {
   mounted: async function() {
     let params = new URLSearchParams(location.search);
     let sessionId = params.get('id');
-    const order = await fetch('http://localhost:8888/.netlify/functions/createOrder', {
+    const order = await fetch(serverUrl+'/createOrder', {
       method: "POST",
       body: JSON.stringify({ cartId: localStorage.getItem('cartId'), sessionId: sessionId})
     }).then((res) => res.json());

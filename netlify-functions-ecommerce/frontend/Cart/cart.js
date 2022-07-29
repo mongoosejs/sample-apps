@@ -1,3 +1,4 @@
+const serverUrl = 'http://localhost:8888/.netlify/functions';
 
 export default {
   data: function() {
@@ -9,7 +10,7 @@ export default {
   methods: {
     // a simple solution to handle the weird rendering of the number on adding and removing is pass a temp copy to the backend instead of the original.
     async removeAll(item) {
-      const updatedCart = await fetch('http://localhost:8888/.netlify/functions/removeFromCart', {
+      const updatedCart = await fetch(serverUrl+'/removeFromCart', {
         method: "POST",
         body: JSON.stringify({cartId: localStorage.getItem('cartId'), item: item})
       }).then((res) => res.json()).then((response) => response.items);
@@ -22,7 +23,7 @@ export default {
     },
     async removeOne(item) {
       item.quantity = 1;
-      const updatedCart = await fetch('http://localhost:8888/.netlify/functions/removeFromCart', {
+      const updatedCart = await fetch(serverUrl+'/removeFromCart', {
         method: "POST",
         body: JSON.stringify({cartId: localStorage.getItem('cartId'), item: item})
       }).then((res) => res.json()).then((response) => response.items);
@@ -32,7 +33,7 @@ export default {
     },
     async addOne(item) {
       item.quantity = 1;
-      const updatedCart = await fetch('http://localhost:8888/.netlify/functions/addToCart', {
+      const updatedCart = await fetch(serverUrl+'/addToCart', {
         method: "POST",
         body: JSON.stringify({cartId: localStorage.getItem('cartId'), item: item})
       }).then((res) => res.json()).then(response => response.items);
@@ -44,8 +45,8 @@ export default {
     }
   },
   mounted: async function() {
-    this.products = await fetch('http://localhost:8888/.netlify/functions/getProducts').then((res) => res.json());
-    this.cart = await fetch(`http://localhost:8888/.netlify/functions/getCart?cartId=${localStorage.getItem('cartId')}`).then((res) => res.json()).then((response) => response.cart.items);
+    this.products = await fetch(serverUrl+'/getProducts').then((res) => res.json());
+    this.cart = await fetch(serverUrl+`/getCart?cartId=${localStorage.getItem('cartId')}`).then((res) => res.json()).then((response) => response.cart.items);
     if (this.cart == null) return;
     for (let i = 0; i < this.cart.length; i++) {
       let product = this.products.find((item) => {

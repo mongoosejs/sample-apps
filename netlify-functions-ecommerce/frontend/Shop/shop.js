@@ -1,3 +1,5 @@
+const serverUrl = 'http://localhost:8888/.netlify/functions';
+
 export default {
     data: function() {
     return {
@@ -11,7 +13,7 @@ export default {
     },
     async addToCart(item) {
       let cartId = localStorage.getItem('cartId');
-      const newCart = await fetch('http://localhost:8888/.netlify/functions/addToCart', {
+      const newCart = await fetch(serverUrl+'/addToCart', {
         method: "POST",
         body: JSON.stringify({cartId: cartId, item: { productId: item._id, quantity: 1 } })
       }).then((res) => res.json());
@@ -32,11 +34,11 @@ export default {
     }
   },
   mounted: async function() {
-    this.products = await fetch('http://localhost:8888/.netlify/functions/getProducts').then((res) => res.json());
+    this.products = await fetch(serverUrl+'/getProducts').then((res) => res.json());
     if (localStorage.getItem('cartId')) {
-      this.cart = await fetch(`http://localhost:8888/.netlify/functions/getCart?cartId=${localStorage.getItem('cartId')}`).then((res) => res.json());
+      this.cart = await fetch(serverUrl+`/getCart?cartId=${localStorage.getItem('cartId')}`).then((res) => res.json());
     } else {
-      this.cart = await fetch('http://localhost:8888/.netlify/functions/getCart').then((res) => res.json());
+      this.cart = await fetch(serverUrl+'/getCart').then((res) => res.json());
     }
     if (this.cart != null) {
       this.cart = this.cart.cart;
