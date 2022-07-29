@@ -17,17 +17,14 @@ describe('Remove From Cart', function() {
     const params = {
       body: {
         cartId: null,
-        items: [
-          { productId: products[0]._id, quantity: 2 },
-          { productId: products[1]._id, quantity: 1 }
-        ]
+        item: { productId: products[0]._id, quantity: 2 },
       }
     };
     params.body = JSON.stringify(params.body);
     const result = await addToCart(params);
     result.body = JSON.parse(result.body);
     assert(result.body);
-    assert.equal(result.body.items.length, 2);
+    assert.equal(result.body.items.length, 1);
     const newParams = {
       body: {
         cartId: result.body._id,
@@ -39,7 +36,7 @@ describe('Remove From Cart', function() {
     newParams.body = JSON.stringify(newParams.body);
     const remove = await removeFromCart(newParams);
     remove.body = JSON.parse(remove.body);
-    assert.equal(remove.body.items.length, 1);
+    assert.equal(remove.body.items.length, 0);
   });
 
   it('Should create a cart and then it should reduce the quantity of an item from it.', async function() {
@@ -48,10 +45,8 @@ describe('Remove From Cart', function() {
     const params = {
       body: {
         cartId: null,
-        items: [
-          { productId: products[0]._id, quantity: 2 },
-          { productId: products[1]._id, quantity: 1 }
-        ]
+        item: { productId: products[0]._id, quantity: 2 },
+ 
       }
     };
     params.body = JSON.stringify(params.body);

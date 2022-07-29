@@ -1,3 +1,4 @@
+
 export default {
   data: function() {
     return {
@@ -33,7 +34,7 @@ export default {
       item.quantity = 1;
       const updatedCart = await fetch('http://localhost:8888/.netlify/functions/addToCart', {
         method: "POST",
-        body: JSON.stringify({cartId: localStorage.getItem('cartId'), items: item})
+        body: JSON.stringify({cartId: localStorage.getItem('cartId'), item: item})
       }).then((res) => res.json()).then(response => response.items);
       const updatedItem = updatedCart.find((product) => product.productId == item.productId);
       item.quantity = updatedItem.quantity;

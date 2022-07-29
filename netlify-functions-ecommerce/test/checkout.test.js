@@ -20,10 +20,7 @@ describe('Checkout', function() {
     const params = {
       body: {
         cartId: null,
-        items: [
-          { productId: products[0]._id, quantity: 2 },
-          { productId: products[1]._id, quantity: 1 }
-        ]
+        item: { productId: products[0]._id, quantity: 2 }
       }
     };
     params.body = JSON.stringify(params.body);

@@ -13,9 +13,8 @@ export default {
       let cartId = localStorage.getItem('cartId');
       const newCart = await fetch('http://localhost:8888/.netlify/functions/addToCart', {
         method: "POST",
-        body: JSON.stringify({cartId: cartId, items: { productId: item._id, quantity: 1 } })
+        body: JSON.stringify({cartId: cartId, item: { productId: item._id, quantity: 1 } })
       }).then((res) => res.json());
-      console.log('Added to cart', newCart);
       if (!localStorage.getItem('cartId')) {
         localStorage.setItem('cartId', newCart._id)
       }
@@ -42,7 +41,6 @@ export default {
     if (this.cart != null) {
       this.cart = this.cart.cart;
     }
-    console.log('what is the cart', this.cart);
   },
   template: 
   `

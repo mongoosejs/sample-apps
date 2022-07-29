@@ -20,34 +20,24 @@ const handler = async(event) => {
           body: JSON.stringify({ message: 'Cart not found' })
         };
       }
-      if (!Array.isArray(event.body.items)) {
-          const product = event.body.items
-          const exists = cart.items.find(item => item?.productId?.toString() === product?.productId?.toString());
-          if (!exists && products.find(p => product?.productId?.toString() === p?._id?.toString())) {
-            cart.items.push(product);
-            await cart.save();
-          } else {
-            exists.quantity += product.quantity;
-            await cart.save();
-          }
+      if (Array.isArray(event.body.item)) {
+        return { statusCode: 500, body: JSON.stringify({ error: 'Items must be an object' })};
+      }
+      const product = event.body.item
+      const exists = cart.items.find(item => item?.productId?.toString() === product?.productId?.toString());
+      if (!exists && products.find(p => product?.productId?.toString() === p?._id?.toString())) {
+        cart.items.push(product);
+        await cart.save();
       } else {
-        for (const product of event.body.items) {
-          const exists = cart.items.find(item => item?.productId?.toString() === product?.productId?.toString());
-          if (!exists && products.find(p => product?.productId?.toString() === p?._id?.toString())) {
-            cart.items.push(product);
-            await cart.save();
-          } else {
-            exists.quantity += product.quantity;
-            await cart.save();
-          }
-        }
+        exists.quantity += product.quantity;
+        await cart.save();
       }
 
       await cart.save();
       return { statusCode: 200, body: JSON.stringify(cart) };
     } else {
       // If no cartId, create a new cart
-      const cart = await Cart.create({ items: event.body.items });
+      const cart = await Cart.create({ items: event.body.item });
       return { statusCode: 200, body: JSON.stringify(cart) };
     }
   } catch (error) {
