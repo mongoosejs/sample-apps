@@ -4,7 +4,7 @@ import Review from '../src/models/review';
 import User from '../src/models/user';
 import {describe, it } from 'mocha';
 import last5 from '../src/api/Vehicle/findById';
-import findByVehicle from '../src/api/Vehicle/findByVehicle';
+import findByVehicle from '../src/api/Review/findByVehicle';
 import assert from 'assert';
 import sinon from 'sinon';
 

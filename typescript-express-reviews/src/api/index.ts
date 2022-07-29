@@ -3,7 +3,7 @@ import register from './User/register';
 import login from './User/login';
 import create from './Review/create';
 import last5 from './Vehicle/findById';
-import findByVehicle from './Vehicle/findByVehicle';
+import findByVehicle from './Review/findByVehicle';
 import bodyParser from 'body-parser';
 import connect from '../models/connect';
 
