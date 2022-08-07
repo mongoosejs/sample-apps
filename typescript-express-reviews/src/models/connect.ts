@@ -2,6 +2,12 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import path from 'path';
 
+mongoose.set('autoCreate', false);
+mongoose.set('autoIndex', false);
+
+import { driver } from 'stargate-mongoose';
+mongoose.setDriver(driver);
+
 const env = process.env.NODE_ENV;
 
 if (env) {
@@ -12,12 +18,12 @@ if (env) {
   dotenv.config();
 }
 
-if (process.env.MONGODB_CONNECTION_STRING == null) {
-  throw new Error('Must set MONGODB_CONNECTION_STRING environment variable');
+if (process.env.ASTRA_URI == null) {
+  throw new Error('Must set ASTRA_URI environment variable');
 }
 
 export default async function connect() {
-  await mongoose.connect(process.env.MONGODB_CONNECTION_STRING);
+  await mongoose.connect(process.env.ASTRA_URI);
 }
 
 

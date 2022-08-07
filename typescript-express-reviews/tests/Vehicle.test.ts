@@ -14,6 +14,8 @@ interface ResponseStub {
 
 describe('Vehicle', function() {
   it('should find a vehicle with its last 5 reviews', async function() {
+    this.timeout(10000);
+
     const mockRequest = (body) => ({
       body
     })
@@ -53,7 +55,7 @@ describe('Vehicle', function() {
     vehicle.numReviews = 5;
     vehicle.averageReview = 3;
     await vehicle.save();
-    const req = mockRequest({ vehicleId: vehicle._id, limit: 5});
+    const req = mockRequest({ vehicleId: vehicle._id, limit: 5 });
     const res = mockResponse();
     await last5(req, res);
     assert(res.json.getCall(0).args[0].vehicle);

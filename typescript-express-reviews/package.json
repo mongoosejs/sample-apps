@@ -7,9 +7,10 @@
   "scripts": {
     "build": "tsc",
     "start": "env NODE_ENV=local ts-node src/api",
-    "test": "env NODE_ENV=test ts-mocha tests/*.test.ts"
+    "test": "env NODE_ENV=test ts-mocha -r src/models/connect.ts tests/*.test.ts"
   },
   "dependencies": {
+    "stargate-mongoose": "file:../astra-mongoose/astra-mongoose-0.0.3.tgz",
     "@types/body-parser": "^1.19.2",
     "bcryptjs": "^2.4.3",
     "dotenv": "16.0.1",

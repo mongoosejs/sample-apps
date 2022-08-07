@@ -6,7 +6,7 @@ import Vehicle from '../models/vehicle';
 const bcrypt = require('bcryptjs');
 
 async function run() {
-  await mongoose.connect('mongodb://localhost:27017/vehicle-reviews');
+  await mongoose.connect(process.env.ASTRA_URI);
   const users = await User.create([
     {
       firstName: 'Dominic',
