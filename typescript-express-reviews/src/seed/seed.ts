@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from '../models/mongoose';
 
 import User from '../models/user';
 import Authentication from '../models/authentication';

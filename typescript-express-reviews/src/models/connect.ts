@@ -1,12 +1,6 @@
-import mongoose from 'mongoose';
+import mongoose from './mongoose';
 import dotenv from 'dotenv';
 import path from 'path';
-
-mongoose.set('autoCreate', false);
-mongoose.set('autoIndex', false);
-
-import { driver } from 'stargate-mongoose';
-mongoose.setDriver(driver);
 
 const env = process.env.NODE_ENV;
 
