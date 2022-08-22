@@ -5,9 +5,9 @@ const connect = require('../connect');
 const mongoose = require('../mongoose');
 
 before(async function() {
-  this.timeout(10000);
+  this.timeout(30000);
   await connect();
-  await Promise.all(Object.values(mongoose.connection.models).map(Model => Model.createCollection()));
+  await Promise.all(Object.values(mongoose.connection.models).map(Model => Model.init()));
   await Promise.all(Object.values(mongoose.connection.models).map(Model => Model.deleteMany({})));
 });
 
