@@ -23,7 +23,7 @@ jobs:
           node-version: ${{ matrix.node }}
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
         with:
-          repository: stargate/stargate-mongoose
+          repository: vkarpov15/stargate-mongoose
           path: stargate-mongoose
       - run: npm install
         working-directory: stargate-mongoose
@@ -53,14 +53,14 @@ jobs:
           node-version: ${{ matrix.node }}
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
         with:
-          repository: vkarpov15/astra-mongoose
-          path: astra-mongoose
+          repository: vkarpov15/stargate-mongoose
+          path: stargate-mongoose
       - run: npm install
-        working-directory: astra-mongoose
+        working-directory: stargate-mongoose
       - run: npm run build
-        working-directory: astra-mongoose
+        working-directory: stargate-mongoose
       - run: npm pack
-        working-directory: astra-mongoose
+        working-directory: stargate-mongoose
       - run: npm install
         working-directory: typescript-express-reviews
       - run: npm test

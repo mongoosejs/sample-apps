@@ -2,7 +2,7 @@
 
 const { Product } = require('./models');
 const config = require('./.config');
-const mongoose = require('mongoose');
+const mongoose = require('./mongoose');
 
 async function createProducts() {
   await mongoose.connect(config.mongodbUri);

@@ -4,7 +4,7 @@ const { describe, it } = require('mocha');
 const assert = require('assert');
 const { handler: addToCart } = require('../netlify/functions/addToCart');
 const fixtures = require('../test/fixtures');
-const mongoose = require('mongoose');
+const mongoose = require('../mongoose');
 
 describe('Add to Cart', function() {
   this.timeout(10000);
