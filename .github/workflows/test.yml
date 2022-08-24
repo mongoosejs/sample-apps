@@ -15,6 +15,23 @@ jobs:
         node: [16]
         os: [ubuntu-20.04]
     name: Ecommerce Sample App
+    env:
+      STARGATE_BASE_URL: http://localhost:8082
+      STARGATE_AUTH_URL: http://localhost:8081/v1/auth
+      STARGATE_USERNAME: cassandra
+      STARGATE_PASSWORD: cassandra
+    services:
+      stargate:
+        image: stargateio/stargate-4_0:v1.0.61
+        env:
+          CLUSTER_NAME: stargate
+          DEVELOPER_MODE: true
+          CLUSTER_VERSION: 4.0 
+        ports:
+          - 8080:8080
+          - 8081:8081
+          - 8082:8082
+          - 9042:9042
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
       - name: Setup node
@@ -36,7 +53,7 @@ jobs:
       - run: npm test
         working-directory: netlify-functions-ecommerce
         env:
-          ASTRA_URI: ${{ secrets.ASTRA_URI }}
+          ASTRA_URI: http://localhost:8081
   test-reviews:
     runs-on: ${{ matrix.os }}
     strategy:
