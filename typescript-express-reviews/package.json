@@ -19,6 +19,7 @@
     "sinon": "^14.0.0"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
     "@types/express": "4.17.13",
     "@types/mocha": "9.1.1",
     "@types/node": "18.0.6",

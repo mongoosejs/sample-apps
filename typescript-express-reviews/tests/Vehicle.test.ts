@@ -2,7 +2,7 @@
 import Vehicle from '../src/models/vehicle';
 import Review from '../src/models/review';
 import User from '../src/models/user';
-import {describe, it } from 'mocha';
+import { describe, it } from 'mocha';
 import last5 from '../src/api/Vehicle/findById';
 import assert from 'assert';
 import sinon from 'sinon';
@@ -18,7 +18,7 @@ describe('Vehicle', function() {
 
     const mockRequest = (body) => ({
       body
-    })
+    });
     const mockResponse = (): ResponseStub => {
       const res: ResponseStub = {
         status: sinon.stub().returnsThis(),
@@ -42,12 +42,12 @@ describe('Vehicle', function() {
         ],
         numReviews: 0,
         averageReview: 0
-      },
+      }
     );
     for (let i = 1; i < 7; i++) {
       await Review.create({
-        rating: i > 5 ? 5 : i, 
-        text: 'This is a review that must have length greater than 30. ' + i, 
+        rating: i > 5 ? 5 : i,
+        text: 'This is a review that must have length greater than 30. ' + i,
         vehicleId: vehicle._id,
         userId: user._id
       });

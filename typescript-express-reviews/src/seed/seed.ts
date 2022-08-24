@@ -3,7 +3,7 @@ import mongoose from '../models/mongoose';
 import User from '../models/user';
 import Authentication from '../models/authentication';
 import Vehicle from '../models/vehicle';
-const bcrypt = require('bcryptjs');
+import bcrypt from 'bcryptjs';
 
 async function run() {
   await mongoose.connect(process.env.ASTRA_URI);
@@ -11,19 +11,19 @@ async function run() {
     {
       firstName: 'Dominic',
       lastName: 'Toretto',
-      email: 'dom@fastandfurious.com',
+      email: 'dom@fastandfurious.com'
     },
     {
       firstName: 'Brian',
       lastName: 'O\'Connor',
-      email: 'brian@fastandfurious.com',
-    },
+      email: 'brian@fastandfurious.com'
+    }
   ]);
-  for (let i = 0 ; i < users.length; i++) {
+  for (let i = 0; i < users.length; i++) {
     await Authentication.create({
       type: 'password',
       userId: users[i]._id,
-      secret: await bcrypt.hash(users[i].firstName.toLowerCase())
+      secret: await bcrypt.hash(users[i].firstName.toLowerCase(), 10)
     });
   }
   const vehicles = await Vehicle.create([
@@ -48,7 +48,7 @@ async function run() {
       ],
       numReviews: 0,
       averageReviews: 0
-    },
+    }
   ]);
 
 }

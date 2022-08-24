@@ -6,7 +6,7 @@ const env = process.env.NODE_ENV;
 
 if (env) {
   dotenv.config({
-    path: path.resolve(path.join(__dirname, '..', '..'), `.env.${env.toLowerCase()}`),
+    path: path.resolve(path.join(__dirname, '..', '..'), `.env.${env.toLowerCase()}`)
   });
 } else {
   dotenv.config();

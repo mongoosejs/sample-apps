@@ -1,5 +1,5 @@
 
-import {describe, it, before } from 'mocha';
+import { describe, it, before } from 'mocha';
 import assert from 'assert';
 import sinon from 'sinon';
 import create from '../src/api/Review/create';
@@ -15,7 +15,7 @@ describe('Review', function() {
   it('should create a review', async function() {
     const mockRequest = (body) => ({
       body
-    })
+    });
     const mockResponse = (): ResponseStub => {
       const res: ResponseStub = {
         status: sinon.stub().returnsThis(),
@@ -39,9 +39,9 @@ describe('Review', function() {
         ],
         numReviews: 0,
         averageReview: 0
-      },
+      }
     );
-    const req = mockRequest({ vehicleId: vehicle._id, userId: user._id, rating: 4, text: 'The length of this text must be greater than 30 to pass validation.'});
+    const req = mockRequest({ vehicleId: vehicle._id, userId: user._id, rating: 4, text: 'The length of this text must be greater than 30 to pass validation.' });
     const res = mockResponse();
     await create(req, res);
     assert(res.json.getCall(0).args[0].review);

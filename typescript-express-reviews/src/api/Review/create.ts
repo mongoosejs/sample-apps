@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import Review from '../../models/review';
 import Vehicle from '../../models/vehicle';
 
-async function create (request: Request, response: Response) {
+async function create(request: Request, response: Response) {
   const review = await Review.create({
     text: request.body.text,
     rating: request.body.rating,
@@ -20,14 +20,14 @@ async function create (request: Request, response: Response) {
   await vehicle.save();
 
   response.status(200).json({ vehicle: vehicle, review: review });
-};
+}
 
 function calculateAverage(ratings) {
   let sum = 0;
   for (let i = 0; i < ratings.length; i++) {
-      sum += ratings[i];
+    sum += ratings[i];
   }
-  let average = sum / ratings.length;
+  const average = sum / ratings.length;
   return average;
 }
 
