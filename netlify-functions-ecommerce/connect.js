@@ -5,12 +5,12 @@ const mongoose = require('./mongoose');
 const { collections } = require('stargate-mongoose');
 
 const stargateUri = collections.createAstraUri(
-  process.env.STARGATE_BASE_URL,
-  process.env.STARGATE_AUTH_URL,
+  config.stargateBaseUrl,
+  config.stargateAuthUrl,
   'test',
-  process.env.STARGATE_USERNAME,
-  process.env.STARGATE_PASSWORD
-)
+  config.stargateUsername,
+  config.stargatePassword
+);
 
 let conn = null;
 

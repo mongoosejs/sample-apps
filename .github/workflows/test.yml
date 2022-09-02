@@ -44,7 +44,7 @@ jobs:
         working-directory: stargate-mongoose
       - run: npm run build
         working-directory: stargate-mongoose
-      - run: npm pack
+      - run: node ../.scripts/create-tarball.js
         working-directory: stargate-mongoose
       - run: npm install
         working-directory: netlify-functions-ecommerce

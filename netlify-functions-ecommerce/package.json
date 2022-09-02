@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
-    "stargate-mongoose": "file:../stargate-mongoose/stargate-mongoose-0.0.3.tgz",
+    "stargate-mongoose": "file:../stargate-mongoose.tgz",
     "mongoose": "6.4.x",
     "sinon": "14.0.0",
     "stripe": "9.6.0"
