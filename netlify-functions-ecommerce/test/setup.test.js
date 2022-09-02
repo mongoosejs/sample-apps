@@ -7,7 +7,13 @@ const mongoose = require('../mongoose');
 before(async function() {
   this.timeout(30_000);
   await connect();
-  await Promise.all(Object.values(mongoose.connection.models).map(Model => Model.init()));
+
+  // Create namespace, otherwise get keyspace does not exist error
+  await mongoose.connection.client.httpClient.post('/v2/schemas/namespaces', {
+    name: 'test'
+  });
+
+  await Promise.all(Object.values(mongoose.connection.models).map(Model => Model.createCollection()));
   await Promise.all(Object.values(mongoose.connection.models).map(Model => Model.deleteMany({})));
 });
 

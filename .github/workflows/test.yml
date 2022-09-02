@@ -38,8 +38,9 @@ jobs:
           node-version: ${{ matrix.node }}
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
         with:
-          repository: vkarpov15/stargate-mongoose
+          repository: stargate/stargate-mongoose
           path: stargate-mongoose
+          ref: stargatification
       - run: npm install
         working-directory: stargate-mongoose
       - run: npm run build
@@ -50,8 +51,6 @@ jobs:
         working-directory: netlify-functions-ecommerce
       - run: npm test
         working-directory: netlify-functions-ecommerce
-        env:
-          ASTRA_URI: http://localhost:8081
   test-reviews:
     runs-on: ${{ matrix.os }}
     strategy:
