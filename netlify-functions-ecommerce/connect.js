@@ -20,7 +20,9 @@ module.exports = async function connect() {
     config.stargatePassword
   );
 
-  console.log('Connect to', stargateUri);
-  await mongoose.connect(stargateUri);
+  await mongoose.connect(stargateUri, {
+    autoCreate: false,
+    autoIndex: false
+  });
   return conn;
 };
