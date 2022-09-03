@@ -1,4 +1,5 @@
 import mongoose from './mongoose';
+import { collections } from 'stargate-mongoose';
 import dotenv from 'dotenv';
 import path from 'path';
 
@@ -12,12 +13,16 @@ if (env) {
   dotenv.config();
 }
 
-if (process.env.ASTRA_URI == null) {
-  throw new Error('Must set ASTRA_URI environment variable');
-}
-
 export default async function connect() {
-  await mongoose.connect(process.env.ASTRA_URI);
+  const stargateUri = await collections.createStargateUri(
+    process.env.STARGATE_BASE_URL,
+    process.env.STARGATE_AUTH_URL,
+    'test',
+    process.env.STARGATE_USERNAME,
+    process.env.STARGATE_PASSWORD
+  );
+
+  await mongoose.connect(stargateUri);
 }
 
 

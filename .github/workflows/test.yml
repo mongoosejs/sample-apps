@@ -59,6 +59,23 @@ jobs:
         node: [16]
         os: [ubuntu-20.04]
     name: Reviews Sample App
+    env:
+      STARGATE_BASE_URL: http://localhost:8082
+      STARGATE_AUTH_URL: http://localhost:8081/v1/auth
+      STARGATE_USERNAME: cassandra
+      STARGATE_PASSWORD: cassandra
+    services:
+      stargate:
+        image: stargateio/stargate-4_0:v1.0.61
+        env:
+          CLUSTER_NAME: stargate
+          DEVELOPER_MODE: true
+          CLUSTER_VERSION: 4.0 
+        ports:
+          - 8080:8080
+          - 8081:8081
+          - 8082:8082
+          - 9042:9042
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
       - name: Setup node
@@ -67,17 +84,16 @@ jobs:
           node-version: ${{ matrix.node }}
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
         with:
-          repository: vkarpov15/stargate-mongoose
+          repository: stargate/stargate-mongoose
           path: stargate-mongoose
+          ref: stargatification
       - run: npm install
         working-directory: stargate-mongoose
       - run: npm run build
         working-directory: stargate-mongoose
-      - run: npm pack
+      - run: node ../.scripts/create-tarball.js
         working-directory: stargate-mongoose
       - run: npm install
         working-directory: typescript-express-reviews
       - run: npm test
         working-directory: typescript-express-reviews
-        env:
-          ASTRA_URI: ${{ secrets.ASTRA_URI }}

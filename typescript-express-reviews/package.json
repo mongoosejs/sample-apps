@@ -10,7 +10,7 @@
     "test": "env NODE_ENV=test ts-mocha -r src/models/connect.ts tests/*.test.ts"
   },
   "dependencies": {
-    "stargate-mongoose": "file:../stargate-mongoose/stargate-mongoose-0.0.3.tgz",
+    "stargate-mongoose": "file:../stargate-mongoose.tgz",
     "@types/body-parser": "^1.19.2",
     "bcryptjs": "^2.4.3",
     "dotenv": "16.0.1",

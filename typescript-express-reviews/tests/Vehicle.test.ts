@@ -13,7 +13,7 @@ interface ResponseStub {
 }
 
 describe('Vehicle', function() {
-  it('should find a vehicle with its last 5 reviews', async function() {
+  it.skip('should find a vehicle with its last 5 reviews', async function() {
     this.timeout(10000);
 
     const mockRequest = (body) => ({
