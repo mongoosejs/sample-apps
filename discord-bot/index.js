@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
+
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
@@ -15,7 +16,6 @@ const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('
 for (const file of commandFiles) {
 	const filePath = path.join(commandsPath, file);
 	const command = require(filePath);
-    console.log(command)
 	// Set a new item in the Collection
 	// With the key as the command name and the value as the exported module
 	client.commands.set(command.data.name, command);
@@ -25,7 +25,6 @@ for (const file of commandFiles) {
 // When the client is ready, run this code (only once)
 client.once('ready', async () => {
 	console.log('Ready!');
-    await mongoose.connect('mongodb://localhost:27017');
 });
 
 client.on('interactionCreate', async interaction => {
@@ -43,5 +42,11 @@ client.on('interactionCreate', async interaction => {
 	}
 });
 
+run();
+
+async function run() {
+// connect to mongoose
+	await mongoose.connect('mongodb://localhost:27017');
 // Login to Discord with your client's token
-client.login(token);
+	client.login(token);
+}
