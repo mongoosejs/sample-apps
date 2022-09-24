@@ -36,6 +36,17 @@ jobs:
         uses: actions/setup-node@eeb10cff27034e7acf239c5d29f62154018672fd # v3.1.1
         with:
           node-version: ${{ matrix.node }}
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+        with:
+          repository: stargate/stargate-mongoose
+          path: stargate-mongoose
+          ref: stargatification
+      - run: npm install
+        working-directory: stargate-mongoose
+      - run: npm run build
+        working-directory: stargate-mongoose
+      - run: node ../.scripts/create-tarball.js
+        working-directory: stargate-mongoose
       - run: npm install
         working-directory: netlify-functions-ecommerce
       - run: npm test
@@ -71,6 +82,17 @@ jobs:
         uses: actions/setup-node@eeb10cff27034e7acf239c5d29f62154018672fd # v3.1.1
         with:
           node-version: ${{ matrix.node }}
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+        with:
+          repository: stargate/stargate-mongoose
+          path: stargate-mongoose
+          ref: stargatification
+      - run: npm install
+        working-directory: stargate-mongoose
+      - run: npm run build
+        working-directory: stargate-mongoose
+      - run: node ../.scripts/create-tarball.js
+        working-directory: stargate-mongoose
       - run: npm install
         working-directory: typescript-express-reviews
       - run: npm test
