@@ -1,5 +1,5 @@
 import mongoose from './mongoose';
-import { createStargateUri } from 'stargate-mongoose';
+import { createStargateUri } from 'stargate-mongoose/dist/collections/utils';
 import dotenv from 'dotenv';
 import path from 'path';
 
