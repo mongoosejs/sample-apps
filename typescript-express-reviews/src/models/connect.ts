@@ -1,5 +1,5 @@
 import mongoose from './mongoose';
-import { createStargateUri } from 'stargate-mongoose/dist/collections/utils';
+import { createStargateUri } from 'stargate-mongoose';
 import dotenv from 'dotenv';
 import path from 'path';
 
@@ -22,10 +22,7 @@ export default async function connect() {
     process.env.STARGATE_PASSWORD
   );
 
-  await mongoose.connect(stargateUri, {
-    autoCreate: false,
-    autoIndex: false
-  });
+  await mongoose.connect(stargateUri);
 }
 
 

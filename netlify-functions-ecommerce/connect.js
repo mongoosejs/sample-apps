@@ -2,7 +2,7 @@
 
 const config = require('./.config');
 const mongoose = require('./mongoose');
-const { createStargateUri } = require('stargate-mongoose/dist/collections/utils');
+const { createStargateUri } = require('stargate-mongoose');
 
 let conn = null;
 
