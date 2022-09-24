@@ -1,5 +1,5 @@
 import mongoose from './mongoose';
-import { collections } from 'stargate-mongoose';
+import { createStargateUri } from 'stargate-mongoose';
 import dotenv from 'dotenv';
 import path from 'path';
 
@@ -14,7 +14,7 @@ if (env) {
 }
 
 export default async function connect() {
-  const stargateUri = await collections.createStargateUri(
+  const stargateUri = await createStargateUri(
     process.env.STARGATE_BASE_URL,
     process.env.STARGATE_AUTH_URL,
     'test',

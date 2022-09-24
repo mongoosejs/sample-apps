@@ -2,7 +2,7 @@
 
 const config = require('./.config');
 const mongoose = require('./mongoose');
-const { collections } = require('stargate-mongoose');
+const { createStargateUri } = require('stargate-mongoose');
 
 let conn = null;
 
@@ -12,7 +12,7 @@ module.exports = async function connect() {
   }
   conn = mongoose.connection;
 
-  const stargateUri = await collections.createStargateUri(
+  const stargateUri = await createStargateUri(
     config.stargateBaseUrl,
     config.stargateAuthUrl,
     'test',
