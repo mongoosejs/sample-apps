@@ -22,7 +22,10 @@ export default async function connect() {
     process.env.STARGATE_PASSWORD
   );
 
-  await mongoose.connect(stargateUri);
+  await mongoose.connect(stargateUri, {
+    autoCreate: false,
+    autoIndex: false
+  });
 }
 
 
