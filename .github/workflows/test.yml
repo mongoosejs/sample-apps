@@ -20,7 +20,7 @@ jobs:
       STARGATE_PASSWORD: cassandra
     services:
       stargate:
-        image: stargateio/stargate-4_0:v1.0.61
+        image: stargateio/stargate-4_0:v1.0.65
         env:
           CLUSTER_NAME: stargate
           DEVELOPER_MODE: true
@@ -55,7 +55,7 @@ jobs:
       STARGATE_PASSWORD: cassandra
     services:
       stargate:
-        image: stargateio/stargate-4_0:v1.0.61
+        image: stargateio/stargate-4_0:v1.0.65
         env:
           CLUSTER_NAME: stargate
           DEVELOPER_MODE: true
