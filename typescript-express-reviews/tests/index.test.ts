@@ -7,12 +7,6 @@ before(async function() {
 
   await connect();
 
-  // Create namespace, otherwise get "Unknown namespace test, you must create it first"
-  // @ts-ignore
-  await mongoose.connection.client.httpClient.post('/v2/schemas/namespaces', {
-    name: 'test'
-  });
-
   // Make sure all collections are created in Stargate, _after_ calling
   // `connect()`. stargate-mongoose doesn't currently support buffering on
   // connection helpers.
@@ -22,7 +16,7 @@ before(async function() {
 });
 
 beforeEach(async function clearDb() {
-  this.timeout(10000);
+  this.timeout(30000);
 
   await Promise.all(Object.values(mongoose.models).map(Model => {
     return Model.deleteMany({});
