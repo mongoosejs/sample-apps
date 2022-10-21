@@ -12,15 +12,19 @@ module.exports = async function connect() {
   }
   conn = mongoose.connection;
 
-  const stargateUri = await createStargateUri(
-    config.stargateBaseUrl,
-    config.stargateAuthUrl,
-    'test',
-    config.stargateUsername,
-    config.stargatePassword
-  );
+  let uri = config.astraUri;
 
-  await mongoose.connect(stargateUri, {
+  if (!uri) {
+    uri = await createStargateUri(
+      config.stargateBaseUrl,
+      config.stargateAuthUrl,
+      'test',
+      config.stargateUsername,
+      config.stargatePassword
+    );
+  }
+
+  await mongoose.connect(uri, {
     autoCreate: false,
     autoIndex: false
   });

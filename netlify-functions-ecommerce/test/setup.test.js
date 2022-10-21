@@ -8,11 +8,6 @@ before(async function() {
   this.timeout(30_000);
   await connect();
 
-  // Create namespace, otherwise get "Unknown namespace test, you must create it first"
-  await mongoose.connection.client.httpClient.post('/v2/schemas/namespaces', {
-    name: 'test'
-  });
-
   await Promise.all(Object.values(mongoose.connection.models).map(Model => Model.createCollection()));
   await Promise.all(Object.values(mongoose.connection.models).map(Model => Model.deleteMany({})));
 });
