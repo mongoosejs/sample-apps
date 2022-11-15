@@ -9,7 +9,10 @@ Other tools include:
 
 ## Running This Example
 
-1. Set `ASTRA_URI` environment variable to point to your Astra instance
+1. Set `ASTRA_URI` environment variable to point to your Astra instance in below format
+``
+https://${databaseId}-${region}.apps.astra.datastax.com/${keyspace}?applicationToken=${applicationToken}
+``
 2. Run `npm install`
 3. Run `npm run seed`
 4. Run `npm start`
