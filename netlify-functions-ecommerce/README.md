@@ -22,7 +22,10 @@ https://${databaseId}-${region}.apps.astra.datastax.com/${keyspace}?applicationT
 
 ## Testing
 
-Make sure you have a MongoDB instance running on `localhost:27017`, or update `mongodbUri` in `.config/test.js` to your MongoDB server's address.
+Make sure you have an AstraDB instance running on your Astra account or a local stargate instance running, then set up the below environment variables as required
+* ``ASTRA_URI`` (if AstraDB) OR 
+* ``STARGATE_BASE_URL``,  ``STARGATE_AUTH_URL``, ``STARGATE_USERNAME`` and ``STARGATE_PASSWORD`` (if stargate instance).
+
 Then run `npm test`.
 
 ```sh
