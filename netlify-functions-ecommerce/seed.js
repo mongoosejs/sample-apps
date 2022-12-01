@@ -7,6 +7,9 @@ const mongoose = require('./mongoose');
 async function createProducts() {
   await mongoose.connect(config.astraUri);
   //await mongoose.connection.dropDatabase();//dropDatabase is not implemented by stargate-mongoose at the moment.
+  
+  await Product.createCollection();
+  await Product.deleteMany();
 
   await Product.create({
     name: 'iPhone 12',
