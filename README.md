@@ -1,2 +1,2 @@
 # sample-apps
-Official sample apps for Mongoose
+Official sample apps for Stargate-Mongoose
