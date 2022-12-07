@@ -14,10 +14,8 @@ if (env) {
 }
 
 export default async function connect() {
-  let stargateUri = '';
-  if(process.env.ASTRA_URI){
-    stargateUri = process.env.ASTRA_URI;
-  } else{
+  let stargateUri = process.env.ASTRA_URI;
+  if(!stargateUri){
     stargateUri = await createStargateUri(
       process.env.STARGATE_BASE_URL,
       process.env.STARGATE_AUTH_URL,
