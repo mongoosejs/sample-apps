@@ -4,11 +4,11 @@ This sample demonstrates integrating Mongoose with [`express`](https://www.npmjs
 
 ## Prerequisites
 
-To run or test this app, have either a stargate running *_OR_* start an AstraDB instance on https://astra.datastax.com/ 
+To run or test this app, have either a Stargate instance running *_OR_* start an AstraDB instance on https://astra.datastax.com/ 
 
 
 ## Testing
-Update ASTRA_URI OR the STARGATE_* variables in the .env.test file and then run below
+Update ASTRA_URI *_OR_* the STARGATE_* variables in the .env.test file and then run below
 
 ```sh
 npm run start
@@ -22,7 +22,7 @@ https://${databaseId}-${region}.apps.astra.datastax.com/${keyspace}?applicationT
 
 ## Running
 
-Update ASTRA_URI OR the STARGATE_* variables in the .env.local file and then run below
+Update ASTRA_URI *_OR_* the STARGATE_* variables in the .env.local file and then run below
 
 Start this example with:
 
