@@ -13,6 +13,7 @@ interface ResponseStub {
 
 describe('Review', function() {
   it('should create a review', async function() {
+    this.timeout(10000);
     const mockRequest = (body) => ({
       body
     });
