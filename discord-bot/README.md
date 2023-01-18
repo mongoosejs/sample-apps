@@ -1,4 +1,5 @@
-Steps to run Bot:
+## Getting Started
+
 1. Create a config.json with the keys from example.json and the values from the developer portal and your discord server.*
 2. run npm install
 3. run node ./deploy-commands.js
@@ -12,15 +13,17 @@ There will be a button to reset the token and this is by design. Discord will on
 
 For more information on setting up your bot and adding it to your server: https://discordjs.guide/preparations/setting-up-a-bot-application.html
 
-You should now be able to run the discord bot in your server locally.
+## Commands
+
+Once the discord bot is running, you should be able to execute the following commands:
+
+- `/ping`: replies "Pong!"
+- `/count`: returns the number of documents currently in your local MongoDB collection.
+- `/createdocument`: inserts a new document into your local MongoDB collection.
+
+Below is a screenshot
+
+![image](https://user-images.githubusercontent.com/1620265/213293087-53505a73-3038-4db8-b21b-d9149a5396ed.png)
+
 
 Anytime you add or update commmands in the command folder, run step 3 again.
-
-All replies must be strings.
-
-Built on
-
-Node: 16.13.2
-Mongoose: 6.6.1
-Discordjs: 14.3.0
-@discordjs/rest: 1.1.0

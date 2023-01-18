@@ -1,7 +1,9 @@
+'use strict';
+
 const mongoose = require('mongoose');
 
 const botSchema = new mongoose.Schema({
-    name: String
+  name: String
 });
 
 const Bot = mongoose.model('Bot', botSchema);
