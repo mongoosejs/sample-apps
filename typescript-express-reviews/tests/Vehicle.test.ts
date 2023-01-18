@@ -2,7 +2,7 @@
 import Vehicle from '../src/models/vehicle';
 import Review from '../src/models/review';
 import User from '../src/models/user';
-import {describe, it } from 'mocha';
+import { describe, it } from 'mocha';
 import last5 from '../src/api/Vehicle/findById';
 import findByVehicle from '../src/api/Review/findByVehicle';
 import assert from 'assert';
@@ -17,7 +17,7 @@ describe('Vehicle', function() {
   it('should find a vehicle with its last 5 reviews', async function() {
     const mockRequest = (body) => ({
       body
-    })
+    });
     const mockResponse = (): ResponseStub => {
       const res: ResponseStub = {
         status: sinon.stub().returnsThis(),
@@ -41,12 +41,12 @@ describe('Vehicle', function() {
         ],
         numReviews: 0,
         averageReview: 0
-      },
+      }
     );
     for (let i = 1; i < 7; i++) {
       await Review.create({
-        rating: i > 5 ? 5 : i, 
-        text: 'This is a review that must have length greater than 30. ' + i, 
+        rating: i > 5 ? 5 : i,
+        text: 'This is a review that must have length greater than 30. ' + i,
         vehicleId: vehicle._id,
         userId: user._id
       });
@@ -54,13 +54,14 @@ describe('Vehicle', function() {
     vehicle.numReviews = 5;
     vehicle.averageReview = 3;
     await vehicle.save();
-    const req = mockRequest({ vehicleId: vehicle._id, limit: 5});
+    const req = mockRequest({ vehicleId: vehicle._id, limit: 5 });
     const res = mockResponse();
     await last5(req, res);
     assert(res.json.getCall(0).args[0].vehicle);
     assert.equal(res.json.getCall(0).args[0].reviews.length, 5);
     assert(res.json.getCall(0).args[0].reviews[0].text.endsWith('6'));
   });
+
   it('Should find all the reviews for the given vehicleId, adhering to the skip and limit parameters', async function() {
     const mockRequest = (body) => ({
       body
