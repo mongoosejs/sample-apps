@@ -1,3 +1,5 @@
+'use strict';
+
 // Require the necessary discord.js classes
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
@@ -7,7 +9,6 @@ const mongoose = require('mongoose');
 
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-
 
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');
@@ -20,7 +21,6 @@ for (const file of commandFiles) {
 	// With the key as the command name and the value as the exported module
 	client.commands.set(command.data.name, command);
 }
-
 
 // When the client is ready, run this code (only once)
 client.once('ready', async () => {

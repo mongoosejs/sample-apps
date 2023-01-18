@@ -1,3 +1,5 @@
+'use strict';
+
 const { SlashCommandBuilder } = require('discord.js');
 const Bot = require('../models/bot')
 
@@ -6,8 +8,8 @@ module.exports = {
 		.setName('createdocument')
 		.setDescription('creates a document'),
 	async execute(interaction) {
-        console.log('hello');
-        await Bot.create({ name: 'I am a document'});
-		await interaction.reply('done!');
+    console.log('hello');
+    await Bot.create({ name: 'I am a document' });
+    await interaction.reply('done!');
 	},
 };
