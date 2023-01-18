@@ -1,6 +1,6 @@
 'use strict';
 
-const mongoose = require('mongoose');
+const mongoose = require('../mongoose');
 
 const botSchema = new mongoose.Schema({
   name: String

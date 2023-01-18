@@ -1,9 +1,10 @@
 ## Getting Started
 
 1. Create a config.json with the keys from example.json and the values from the developer portal and your discord server.*
-2. run npm install
-3. run node ./deploy-commands.js
-4. run node ./index.js
+2. Run npm install
+3. Set `ASTRA_URI` environment variable to point to your Astra instance in following format: `https://${databaseId}-${region}.apps.astra.datastax.com/${keyspace}?applicationToken=${applicationToken}`
+3. Run node ./deploy-commands.js
+4. Run node ./index.js
 
 * `guildId` is obtained by going into your server's settings and clicking on the widget tab. The server id is the `guildId`.
 * `clientId` is obtained by going to the discord developer portal, clicking your bot, and then clicking OAuth2.

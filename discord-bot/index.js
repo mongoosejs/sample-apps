@@ -5,7 +5,7 @@ const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
 const fs = require('fs');
 const path = require('node:path');
-const mongoose = require('mongoose');
+const mongoose = require('./mongoose');
 
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -45,8 +45,9 @@ client.on('interactionCreate', async interaction => {
 run();
 
 async function run() {
-// connect to mongoose
-	await mongoose.connect('mongodb://localhost:27017');
-// Login to Discord with your client's token
+  // connect to mongoose
+  console.log(process.env.ASTRA_URI);
+	await mongoose.connect(process.env.ASTRA_URI);
+  // Login to Discord with your client's token
 	client.login(token);
 }
