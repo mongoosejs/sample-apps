@@ -2,9 +2,8 @@
 
 const BaseComponent = require('../BaseComponent');
 
-module.exports = app => app.component('home', {
+module.exports = app => app.component('products', {
   inject: ['state'],
-  data: () => ({ products: [] }),
   methods: {
     formatPrice(price) {
       return `$${price.toFixed(2)}`;
@@ -30,5 +29,5 @@ module.exports = app => app.component('home', {
       }
     }
   },
-  extends: BaseComponent(require('./home.html'), require('./home.css'))
+  extends: BaseComponent(require('./products.html'), require('./products.css'))
 });

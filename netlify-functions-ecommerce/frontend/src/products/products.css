@@ -1,0 +1,29 @@
+.products .iphone {
+  width: 25%;
+}
+
+.products .iphone .image-wrapper {
+  background-color: #ddd;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.products .iphone img {
+  width: 100%;
+}
+
+.products .iphone-container {
+  display: flex;
+  gap: 15px;
+}
+
+.products .iphone .info-wrapper {
+  font-weight: bold;
+  display: flex;
+  margin-top: 0.5em;
+}
+
+.products .iphone .info-wrapper .price {
+  text-align: right;
+  flex-grow: 1;
+}

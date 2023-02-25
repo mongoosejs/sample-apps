@@ -6,22 +6,24 @@
     <h1>
       Get the Latest iPhones<br>at the Best Prices 
     </h1>
-    <a href="#iphones-for-you">
+    <router-link to="/products">
       <button>Shop Now!</button>
-    </a>
+    </router-link>
   </div>
   <div>
     <h2>iPhones For You</h2>
 
     <div class="iphone-container">
-      <div v-for="product in products" class="iphone">
+      <div v-for="product in state.products" class="iphone">
         <div class="image-wrapper">
-          <img :src="product.image">
+          <router-link :to="'/products/' + product._id">
+            <img :src="product.image">
+          </router-link>
         </div>
         <div class="info-wrapper">
-          <div>
+          <router-link :to="'/products/' + product._id">
             {{product.name}}
-          </div>
+          </router-link>
           <div class="price">
             {{formatPrice(product.price)}}
           </div>

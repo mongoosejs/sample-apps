@@ -17,7 +17,7 @@ const routes = require('./src/routes');
 let toml = '';
 const createTomlRedirect = route => `
 [[redirects]]
-  from = "${route}"
+  from = "${route.replace(/:\w+/g, '*')}"
   to = "/"
   status = 200
 `.trim();

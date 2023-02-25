@@ -4,5 +4,13 @@ module.exports = [
   {
     path: '/',
     name: 'home'
+  },
+  {
+    path: '/products',
+    name: 'products'
+  },
+  {
+    path: '/products/:productId',
+    name: 'product'
   }
 ];

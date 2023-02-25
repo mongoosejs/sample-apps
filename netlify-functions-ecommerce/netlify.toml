@@ -1,0 +1,9 @@
+[[redirects]]
+  from = "/products"
+  to = "/"
+  status = 200
+
+[[redirects]]
+  from = "/products/*"
+  to = "/"
+  status = 200

@@ -1,0 +1,29 @@
+<div class="product">
+  <div class="breadcrumbs" v-if="product">
+    <router-link to="/products">All Products</router-link>
+    /
+    {{product.name}}
+  </div>
+  <div class="product-wrapper" v-if="product">
+    <div class="product-image">
+      <img :src="product.image">
+    </div>
+    <div class="product-description">
+      <div class="name">
+        {{product.name}}
+      </div>
+      <div class="price">
+        {{formatPrice(product.price)}}
+      </div>
+      <div class="description">
+        {{product.description}}
+      </div>
+  
+      <div class="add-to-cart">
+        <button @click="addToCart(product)">
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

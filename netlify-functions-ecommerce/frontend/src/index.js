@@ -8,7 +8,8 @@ const app = Vue.createApp({
 
     const state = Vue.reactive({
       cartId,
-      cart: null
+      cart: null,
+      products: []
     });
 
     Vue.provide('state', state);
@@ -21,9 +22,12 @@ const app = Vue.createApp({
     } 
 
     const cartId = encodeURIComponent(this.cartId);
-    const cart = await fetch('/.netlify/functions/getCart?cartId=' + cartId).
+    const { cart } = await fetch('/.netlify/functions/getCart?cartId=' + cartId).
       then(res => res.json());
     this.cart = cart;
+
+    const products = await fetch('/.netlify/functions/getProducts').then(res => res.json());
+    this.products = products;
   },
   template: '<app-component />'
 });
@@ -41,6 +45,8 @@ app.component('app-component', {
 
 require('./home/home')(app);
 require('./navbar/navbar')(app);
+require('./product/product')(app);
+require('./products/products')(app);
 
 const router = VueRouter.createRouter({
   history: VueRouter.createWebHistory(),

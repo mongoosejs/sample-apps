@@ -1,10 +1,15 @@
 'use strict';
+
 const mongoose = require('mongoose');
+
+mongoose.set('toJSON', { virtuals: true });
+mongoose.set('toObject', { virtuals: true });
 
 const productSchema = new mongoose.Schema({
   name: String,
   price: Number,
-  image: String
+  image: String,
+  description: String
 });
 
 const Product = mongoose.model('Product', productSchema);
@@ -81,6 +86,10 @@ const cartSchema = new mongoose.Schema({
   }],
   orderId: { type: mongoose.ObjectId, ref: 'Order' }
 }, { timestamps: true });
+
+cartSchema.virtual('numItems').get(function numItems() {
+  return this.items.reduce((sum, item) => sum + item.quantity, 0);
+});
 
 const Cart = mongoose.model('Cart', cartSchema);
 
