@@ -4,7 +4,6 @@ const BaseComponent = require('../BaseComponent');
 
 module.exports = app => app.component('home', {
   inject: ['state'],
-  data: () => ({ products: [] }),
   methods: {
     formatPrice(price) {
       return `$${price.toFixed(2)}`;

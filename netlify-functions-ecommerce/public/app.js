@@ -36,6 +36,44 @@ function appendCSS(css) {
 
 /***/ }),
 
+/***/ "./frontend/src/cart/cart.js":
+/*!***********************************!*\
+  !*** ./frontend/src/cart/cart.js ***!
+  \***********************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+const BaseComponent = __webpack_require__(/*! ../BaseComponent */ "./frontend/src/BaseComponent.js");
+
+module.exports = app => app.component('cart', {
+  inject: ['state'],
+  computed: {
+    cartTotal() {
+      return '$' + this.state.cart.items.reduce((sum, item) => {
+        return sum + (+(item.quantity * this.product(item).price).toFixed(2))
+      }, 0).toFixed(2);
+    }
+  },
+  methods: {
+    product(item) {
+      const product = this.state.products.find(product => product._id === item.productId);
+      return product;
+    },
+    formatTotal(item, product) {
+      if (!product) {
+        return '';
+      }
+      const total = (item.quantity * product.price).toFixed(2);
+      return `$${total}`;
+    }
+  },
+  extends: BaseComponent(__webpack_require__(/*! ./cart.html */ "./frontend/src/cart/cart.html"), __webpack_require__(/*! ./cart.css */ "./frontend/src/cart/cart.css"))
+});
+
+/***/ }),
+
 /***/ "./frontend/src/home/home.js":
 /*!***********************************!*\
   !*** ./frontend/src/home/home.js ***!
@@ -49,7 +87,6 @@ const BaseComponent = __webpack_require__(/*! ../BaseComponent */ "./frontend/sr
 
 module.exports = app => app.component('home', {
   inject: ['state'],
-  data: () => ({ products: [] }),
   methods: {
     formatPrice(price) {
       return `$${price.toFixed(2)}`;
@@ -211,8 +248,34 @@ module.exports = [
   {
     path: '/products/:productId',
     name: 'product'
+  },
+  {
+    path: '/cart',
+    name: 'cart'
   }
 ];
+
+/***/ }),
+
+/***/ "./frontend/src/cart/cart.css":
+/*!************************************!*\
+  !*** ./frontend/src/cart/cart.css ***!
+  \************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = ".cart .cart-item {\n  display: flex;\n  gap: 10px;\n  width: 100%;\n  margin-bottom: 1em;\n}\n\n.cart .cart-item .product-image {\n  width: 80px;\n  border: 1px solid #ddd;\n  border-radius: 8px;\n  padding: 5px;\n}\n\n.cart .cart-item .product-image img {\n  width: 100%;\n  height: auto;\n  vertical-align: middle;\n}\n\n.cart .cart-item .item-description {\n  flex-grow: 1;\n}\n\n.cart .cart-item .item-description .name {\n  margin-bottom: 0.5em;\n  font-weight: bold;\n}\n\n.cart .cart-item .subtotal {\n  width: 60px;\n  font-weight: bold;\n  text-align: right;\n}\n\n.cart .total {\n  width: 100%;\n  font-weight: bold;\n  border-top: 1px solid #ddd;\n  padding-top: 1em;\n  display: flex;\n}\n\n.cart .total .total-text {\n  width: 50%;\n}\n\n.cart .total .total-price {\n  text-align: right;\n  width: 50%;\n}\n\n.cart .checkout {\n  text-align: center;\n}\n\n.cart .checkout button {\n  margin-top: 1em;\n  font-size: 2em;\n  background-color: white;\n  border: 2px solid #43783E;\n  color: #43783E;\n  padding: 0.5em 1em;\n  border-radius: 16px;\n}\n\n.cart .checkout button:hover {\n  color: white;\n  background-color: #43783E;\n}";
+
+/***/ }),
+
+/***/ "./frontend/src/cart/cart.html":
+/*!*************************************!*\
+  !*** ./frontend/src/cart/cart.html ***!
+  \*************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = "<div class=\"cart\">\n  <h1>My Cart</h1>\n  <div v-if=\"state.cart\">\n    <div v-for=\"item in state.cart.items\" class=\"cart-item\">\n      <div class=\"product-image\">\n        <img :src=\"product(item).image\">\n      </div>\n      <div class=\"item-description\">\n        <div class=\"name\">\n          {{product(item).name}}\n        </div>\n        <div class=\"quantity\">\n          x{{item.quantity}}\n        </div>\n      </div>\n      <div class=\"subtotal\">\n        {{formatTotal(item, product(item))}}\n      </div>\n    </div>\n    <div class=\"total\">\n      <div class=\"total-text\">\n        Total\n      </div>\n      <div class=\"total-price\">\n        {{cartTotal}}\n      </div>\n    </div>\n\n    <div class=\"checkout\">\n      <button>Check Out</button>\n    </div>\n  </div>\n</div>";
 
 /***/ }),
 
@@ -256,7 +319,7 @@ module.exports = ".navbar {\n  max-width: 1000px;\n  display: flex;\n  margin-le
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<div class=\"navbar\">\n  <div class=\"logo\">\n    <img src=\"/images/logo.png\">\n    iPhoneMarket\n  </div>\n  <div class=\"nav-center\">&nbsp;</div>\n  <div class=\"right\">\n    <img src=\"/images/shopping-cart.svg\">\n    <span>Cart</span>\n    <div\n      class=\"cart-indicator\"\n      v-if=\"state.cart && state.cart.numItems\">\n      {{state.cart.numItems}}\n    </div>\n  </div>\n</div>";
+module.exports = "<div class=\"navbar\">\n  <div class=\"logo\">\n    <router-link to=\"/\">\n      <img src=\"/images/logo.png\">\n      iPhoneMarket\n    </router-link>\n  </div>\n  <div class=\"nav-center\">&nbsp;</div>\n  <div class=\"right\">\n    <router-link to=\"/cart\">\n      <img src=\"/images/shopping-cart.svg\">\n      <span>Cart</span>\n      <div\n        class=\"cart-indicator\"\n        v-if=\"state.cart && state.cart.numItems\">\n        {{state.cart.numItems}}\n      </div>\n    </router-link>\n  </div>\n</div>";
 
 /***/ }),
 
@@ -357,6 +420,9 @@ const app = Vue.createApp({
     return state;
   },
   async mounted() {
+    const products = await fetch('/.netlify/functions/getProducts').then(res => res.json());
+    this.products = products;
+
     if (!this.cartId) {
       return;
     } 
@@ -365,9 +431,6 @@ const app = Vue.createApp({
     const { cart } = await fetch('/.netlify/functions/getCart?cartId=' + cartId).
       then(res => res.json());
     this.cart = cart;
-
-    const products = await fetch('/.netlify/functions/getProducts').then(res => res.json());
-    this.products = products;
   },
   template: '<app-component />'
 });
@@ -383,6 +446,7 @@ app.component('app-component', {
   `
 });
 
+__webpack_require__(/*! ./cart/cart */ "./frontend/src/cart/cart.js")(app);
 __webpack_require__(/*! ./home/home */ "./frontend/src/home/home.js")(app);
 __webpack_require__(/*! ./navbar/navbar */ "./frontend/src/navbar/navbar.js")(app);
 __webpack_require__(/*! ./product/product */ "./frontend/src/product/product.js")(app);

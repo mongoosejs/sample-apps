@@ -17,6 +17,9 @@ const app = Vue.createApp({
     return state;
   },
   async mounted() {
+    const products = await fetch('/.netlify/functions/getProducts').then(res => res.json());
+    this.products = products;
+
     if (!this.cartId) {
       return;
     } 
@@ -25,9 +28,6 @@ const app = Vue.createApp({
     const { cart } = await fetch('/.netlify/functions/getCart?cartId=' + cartId).
       then(res => res.json());
     this.cart = cart;
-
-    const products = await fetch('/.netlify/functions/getProducts').then(res => res.json());
-    this.products = products;
   },
   template: '<app-component />'
 });
@@ -43,6 +43,7 @@ app.component('app-component', {
   `
 });
 
+require('./cart/cart')(app);
 require('./home/home')(app);
 require('./navbar/navbar')(app);
 require('./product/product')(app);

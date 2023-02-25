@@ -12,5 +12,9 @@ module.exports = [
   {
     path: '/products/:productId',
     name: 'product'
+  },
+  {
+    path: '/cart',
+    name: 'cart'
   }
 ];

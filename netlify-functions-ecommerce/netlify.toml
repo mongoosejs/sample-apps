@@ -7,3 +7,8 @@
   from = "/products/*"
   to = "/"
   status = 200
+
+[[redirects]]
+  from = "/cart"
+  to = "/"
+  status = 200
