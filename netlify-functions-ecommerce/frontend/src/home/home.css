@@ -1,0 +1,71 @@
+.home {
+  margin-bottom: 80px;
+}
+
+.home .hero {
+  background-color: #CFFC7B;
+  padding: 50px;
+  position: relative;
+  overflow: hidden;
+}
+
+.home .hero h1 {
+  line-height: 1.25em;
+}
+
+.home .hero button {
+  padding: 10px 15px;
+  border-radius: 8px;
+  color: white;
+  background-color: #43783E;
+  border: 0px;
+  font-size: 1.5em;
+  margin-top: 10px;
+}
+
+.home .hero img {
+  width: 33%;
+  position: absolute;
+  right: 15px;
+  top: -10px;
+}
+
+.home .iphone {
+  width: 25%;
+}
+
+.home .iphone .image-wrapper {
+  background-color: #ddd;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.home .iphone img {
+  width: 100%;
+}
+
+.home .iphone-container {
+  display: flex;
+  gap: 15px;
+}
+
+.home .iphone .info-wrapper {
+  font-weight: bold;
+  display: flex;
+  margin-top: 0.5em;
+}
+
+.home .iphone .info-wrapper .price {
+  text-align: right;
+  flex-grow: 1;
+}
+
+.home .add-to-cart button {
+  background-color: white;
+  border: 2px solid #43783E;
+  color: #43783E;
+  padding: 0.5em 0.5em;
+  border-radius: 8px;
+  margin-top: 0.5em;
+  cursor: pointer;
+}

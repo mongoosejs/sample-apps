@@ -1,0 +1,33 @@
+.navbar {
+  max-width: 1000px;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 25px;
+}
+
+.navbar img {
+  vertical-align: middle;
+}
+
+.navbar .logo {
+  flex-grow: 0;
+  font-size: 2em;
+}
+
+.navbar .logo img {
+  height: 45px;
+}
+
+.navbar .nav-center {
+  flex-grow: 1;
+}
+
+.navbar .right {
+  padding-top: 11px;
+}
+
+.navbar .right img {
+  height: 1.5em;
+  margin-right: 0.5em;
+}

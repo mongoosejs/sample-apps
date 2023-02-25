@@ -1,0 +1,37 @@
+<div class="home">
+  <div class="hero">
+    <div class="image-bg">
+      <img src="/images/woman-with-iphone.png">
+    </div>
+    <h1>
+      Get the Latest iPhones<br>at the Best Prices 
+    </h1>
+    <a href="#iphones-for-you">
+      <button>Shop Now!</button>
+    </a>
+  </div>
+  <div>
+    <h2>iPhones For You</h2>
+
+    <div class="iphone-container">
+      <div v-for="product in products" class="iphone">
+        <div class="image-wrapper">
+          <img :src="product.image">
+        </div>
+        <div class="info-wrapper">
+          <div>
+            {{product.name}}
+          </div>
+          <div class="price">
+            {{formatPrice(product.price)}}
+          </div>
+        </div>
+        <div class="add-to-cart">
+          <button>
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
