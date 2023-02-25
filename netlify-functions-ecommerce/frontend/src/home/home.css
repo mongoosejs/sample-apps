@@ -69,3 +69,9 @@
   margin-top: 0.5em;
   cursor: pointer;
 }
+
+.home .add-to-cart button:hover {
+  background-color: #43783E;
+  border: 2px solid #43783E;
+  color: white;
+}

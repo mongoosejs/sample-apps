@@ -1,11 +1,12 @@
 <div class="navbar">
   <div class="logo">
     <img src="images/logo.png">
-    iMarket
+    iPhoneMarket
   </div>
   <div class="nav-center">&nbsp;</div>
   <div class="right">
     <img src="images/shopping-cart.svg">
     <span>Cart</span>
+    <span v-if="state.cart">{{state.cart.items.length}}</span>
   </div>
 </div>
