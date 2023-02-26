@@ -9,16 +9,13 @@ Other tools include:
 
 ## Running This Example
 
-1. Set `ASTRA_URI` environment variable to point to your Astra instance in below format
-``
-https://${databaseId}-${region}.apps.astra.datastax.com/${keyspace}?applicationToken=${applicationToken}
-``
-2. Run `npm install`
-3. Run `npm run seed`
-4. Run `npm start`
-5. Visit `http://localhost:8888/.netlify/functions/getProducts` to list all available products
+1. Run `npm install`
+2. Run `npm run seed`
+3. Run `npm run build` to compile the frontend
+4. (Optional) set `stripeSecretKey` in `.config/development.js` to a test Stripe API key to enable Stripe checkout.
+5. Run `npm start`
 6. Run `npm run test:smoke` to run a smoke test against `http://localhost:8888` that creates a cart using [Axios](https://masteringjs.io/axios).
-7. Run other endpoints using curl or postman
+7. Visit `http://localhost:8888/` to see the UI
 
 ## Testing
 
