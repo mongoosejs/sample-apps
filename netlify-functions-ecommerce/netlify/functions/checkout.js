@@ -2,7 +2,7 @@
 
 const stripe = require('../../integrations/stripe');
 const config = require('../../.config');
-const { Cart, Order, Product } = require('../../models');
+const { Cart, Product } = require('../../models');
 const connect = require('../../connect');
 
 const handler = async(event) => {
@@ -24,45 +24,36 @@ const handler = async(event) => {
           product_data: {
             name: product.name
           },
-          unit_amount: product.price
+          unit_amount: product.price * 100
         },
         quantity: cart.items[i].quantity
       });
       total = total + (product.price * cart.items[i].quantity);
     }
+
+    cart.total = +(total / 100).toFixed(2);
+
+    if (config.stripeSecretKey === 'test') {
+      await cart.save();
+      return {
+        statusCode: 200,
+        body: JSON.stringify({ cart: cart, url: '/order-confirmation' })
+      }
+    }
+
     const session = await stripe.checkout.sessions.create({
       line_items: stripeProducts.line_items,
       mode: 'payment',
       success_url: config.stripeSuccessUrl,
       cancel_url: config.stripeCancelUrl
     });
-    const intent = await stripe.paymentIntents.retrieve(session.payment_intent);
-    if (intent.status !== 'succeeded') {
-      throw new Error(`Checkout failed because intent has status "${intent.status}"`);
-    }
-    const paymentMethod = await stripe.paymentMethods.retrieve(intent['payment_method']);
-    const orders = await Order.find();
-    const orderNumber = orders.length ? orders.length + 1 : 1;
-    const order = await Order.create({
-      items: event.body.product,
-      total: total,
-      orderNumber: orderNumber,
-      name: event.body.name,
-      email: event.body.email,
-      address1: event.body.address1,
-      city: event.body.city,
-      state: event.body.state,
-      zip: event.body.zip,
-      shipping: event.body.shipping,
-      paymentMethod: paymentMethod ? { id: paymentMethod.id, brand: paymentMethod.brand, last4: paymentMethod.last4 } : null
-    });
 
-    cart.orderId = order._id;
+    cart.stripeSessionId = session.id;
     await cart.save();
+
     return {
       statusCode: 200,
-      body: JSON.stringify({ order: order, cart: cart }),
-      headers: { Location: session.url }
+      body: JSON.stringify({ cart: cart, url: session.url })
     };
   } catch (error) {
     return { statusCode: 500, body: error.toString() };

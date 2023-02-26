@@ -1,0 +1,33 @@
+<div class="cart">
+  <h1>My Cart</h1>
+  <div v-if="state.cart">
+    <div v-for="item in state.cart.items" class="cart-item">
+      <div class="product-image">
+        <img :src="product(item).image">
+      </div>
+      <div class="item-description">
+        <div class="name">
+          {{product(item).name}}
+        </div>
+        <div class="quantity">
+          x{{item.quantity}}
+        </div>
+      </div>
+      <div class="subtotal">
+        {{formatTotal(item, product(item))}}
+      </div>
+    </div>
+    <div class="total">
+      <div class="total-text">
+        Total
+      </div>
+      <div class="total-price">
+        {{cartTotal}}
+      </div>
+    </div>
+
+    <div class="checkout">
+      <button @click="checkout">Check Out</button>
+    </div>
+  </div>
+</div>

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
-    "stargate-mongoose": "0.1.1",
+    "stargate-mongoose": "file:../../sg-mongoose2/stargate-mongoose-0.1.1.tgz",
     "mongoose": "6.4.x",
     "sinon": "14.0.0",
     "stripe": "9.6.0"
@@ -11,11 +11,14 @@
   "devDependencies": {
     "axios": "0.27.2",
     "mocha": "10.0.0",
-    "netlify-cli": "10.7.1"
+    "netlify-cli": "10.7.1",
+    "vanillatoasts": "1.6.0",
+    "webpack": "5.x"
   },
   "scripts": {
+    "build": "node ./frontend/build",
     "seed": "env NODE_ENV=local node ./seed",
-    "start": "env NODE_ENV=local netlify dev",
+    "start": "env NODE_ENV=local netlify dev --dir public",
     "test": "env NODE_ENV=test mocha ./test/*.test.js",
     "test:smoke": "node ./smoke-test"
   }

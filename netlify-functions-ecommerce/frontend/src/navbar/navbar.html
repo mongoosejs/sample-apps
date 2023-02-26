@@ -1,0 +1,20 @@
+<div class="navbar">
+  <div class="logo">
+    <router-link to="/">
+      <img src="/images/logo.png">
+      iPhoneMarket
+    </router-link>
+  </div>
+  <div class="nav-center">&nbsp;</div>
+  <div class="right">
+    <router-link to="/cart">
+      <img src="/images/shopping-cart.svg">
+      <span>Cart</span>
+      <div
+        class="cart-indicator"
+        v-if="state.cart && state.cart.numItems">
+        {{state.cart.numItems}}
+      </div>
+    </router-link>
+  </div>
+</div>
