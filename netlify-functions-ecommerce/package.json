@@ -15,6 +15,7 @@
     "webpack": "5.x"
   },
   "scripts": {
+    "build": "node ./frontend/build",
     "seed": "env NODE_ENV=local node ./seed",
     "start": "env NODE_ENV=local netlify dev --dir public",
     "test": "env NODE_ENV=test mocha ./test/*.test.js",
