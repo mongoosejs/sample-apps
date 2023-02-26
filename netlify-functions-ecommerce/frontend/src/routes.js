@@ -16,5 +16,9 @@ module.exports = [
   {
     path: '/cart',
     name: 'cart'
+  },
+  {
+    path: '/order-confirmation',
+    name: 'order-confirmation'
   }
 ];

@@ -12,3 +12,8 @@
   from = "/cart"
   to = "/"
   status = 200
+
+[[redirects]]
+  from = "/order-confirmation"
+  to = "/"
+  status = 200

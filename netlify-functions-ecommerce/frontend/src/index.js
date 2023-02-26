@@ -7,6 +7,7 @@ const app = Vue.createApp({
     const cartId = window.localStorage.getItem('__cartKey') || null;
 
     const state = Vue.reactive({
+      status: 'loading',
       cartId,
       cart: null,
       products: []
@@ -21,6 +22,7 @@ const app = Vue.createApp({
     this.products = products;
 
     if (!this.cartId) {
+      this.status = 'loaded';
       return;
     } 
 
@@ -28,16 +30,18 @@ const app = Vue.createApp({
     const { cart } = await fetch('/.netlify/functions/getCart?cartId=' + cartId).
       then(res => res.json());
     this.cart = cart;
+    this.status = 'loaded';
   },
   template: '<app-component />'
 });
 
 app.component('app-component', {
+  inject: ['state'],
   template: `
   <div>
     <navbar />
     <div class="view">
-      <router-view />
+      <router-view v-if="state.status === 'loaded'" />
     </div>
   </div>
   `
@@ -46,6 +50,7 @@ app.component('app-component', {
 require('./cart/cart')(app);
 require('./home/home')(app);
 require('./navbar/navbar')(app);
+require('./order-confirmation/order-confirmation')(app);
 require('./product/product')(app);
 require('./products/products')(app);
 

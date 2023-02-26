@@ -1,0 +1,26 @@
+.order-confirmation .order-info {
+  display: flex;
+}
+
+.order-confirmation .order-info .order-detail {
+  flex-grow: 1;
+}
+
+.order-confirmation .order-info .order-detail .subheader {
+  font-weight: bold;
+}
+
+.order-confirmation button {
+  background-color: white;
+  border: 2px solid #43783E;
+  color: #43783E;
+  padding: 0.5em 1em;
+  border-radius: 16px;
+  margin-top: 1em;
+}
+
+.order-confirmation button:hover {
+  background-color: #43783E;
+  border: 2px solid #43783E;
+  color: white;
+}

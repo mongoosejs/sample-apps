@@ -108,3 +108,5 @@ yarn.lock
 
 # config
 config.json
+
+netlify-functions-ecommerce/public/app.js

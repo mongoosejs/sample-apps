@@ -22,6 +22,21 @@ module.exports = app => app.component('cart', {
       }
       const total = (item.quantity * product.price).toFixed(2);
       return `$${total}`;
+    },
+    async checkout() {
+      const res = await fetch('/.netlify/functions/checkout', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          cartId: this.state.cartId
+        })
+      }).then(res => res.json());
+
+      if (res.url) {
+        window.location.href = res.url;
+      }
     }
   },
   extends: BaseComponent(require('./cart.html'), require('./cart.css'))
