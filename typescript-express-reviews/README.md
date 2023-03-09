@@ -2,27 +2,12 @@
 
 This sample demonstrates integrating Mongoose with [`express`](https://www.npmjs.com/package/express).
 
-## Prerequisites
+## Setup
 
-To run or test this app, have either a Stargate instance running *_OR_* start an AstraDB instance on https://astra.datastax.com/ 
-
-
-## Testing
-Update ASTRA_URI *_OR_* the STARGATE_* variables in the .env.test file and then run below
-
-```sh
-npm run start
-```
-
-Set `ASTRA_URI` environment variable to point to your Astra instance in below format
-``
-https://${databaseId}-${region}.apps.astra.datastax.com/${keyspace}?applicationToken=${applicationToken}
-``
+Make sure you have a local stargate instance running as described on the [main page](../README.md) of this repo.
 
 
-## Running
-
-Update ASTRA_URI *_OR_* the STARGATE_* variables in the .env.local file and then run below
+## Running This Example
 
 Start this example with:
 

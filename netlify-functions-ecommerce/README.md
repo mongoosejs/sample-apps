@@ -4,24 +4,22 @@ This sample demonstrates using Mongoose to build an eCommerce shopping cart usin
 
 Other tools include:
 
-1. Stripe for payment processing
-2. [Mocha](https://masteringjs.io/mocha) and [Sinon](https://masteringjs.io/sinon) for testing
+* Stripe for payment processing
+* [Mocha](https://masteringjs.io/mocha) and [Sinon](https://masteringjs.io/sinon) for testing
+
+## Setup
+
+Make sure you have a local stargate instance running as described on the [main page](../README.md) of this repo.
 
 ## Running This Example
 
 1. Run `npm install`
-2. Run `npm run seed`
-3. Run `npm run build` to compile the frontend
-4. (Optional) set `stripeSecretKey` in `.config/development.js` to a test Stripe API key to enable Stripe checkout.
-5. Run `npm start`
-6. Run `npm run test:smoke` to run a smoke test against `http://localhost:8888` that creates a cart using [Axios](https://masteringjs.io/axios).
-7. Visit `http://localhost:8888/` to see the UI
-
-## Testing
-
-Make sure you have an AstraDB instance running on your Astra account or a local stargate instance running, then set up the below environment variables as required
-* ``ASTRA_URI`` (if AstraDB) OR 
-* ``STARGATE_BASE_URL``,  ``STARGATE_AUTH_URL``, ``STARGATE_USERNAME`` and ``STARGATE_PASSWORD`` (if stargate instance).
+1. Run `npm run seed`
+1. Run `npm run build` to compile the frontend
+1. (Optional) set `stripeSecretKey` in `.config/development.js` to a test Stripe API key to enable Stripe checkout.
+1. Run `npm start`
+Run `npm run test:smoke` to run a smoke test against `http://localhost:8888` that creates a cart using [Axios](https://masteringjs.io/axios).
+1. Visit `http://localhost:8888/` to see the UI
 
 Then run `npm test`.
 
