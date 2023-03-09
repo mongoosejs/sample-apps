@@ -2,7 +2,8 @@
 
 const config = require('./.config');
 const mongoose = require('./mongoose');
-const { createStargateUri } = require('stargate-mongoose');
+
+require('./models');
 
 let conn = null;
 
@@ -14,19 +15,13 @@ module.exports = async function connect() {
 
   let uri = config.astraUri;
 
-  if (!uri) {
-    uri = await createStargateUri(
-      config.stargateBaseUrl,
-      config.stargateAuthUrl,
-      'test',
-      config.stargateUsername,
-      config.stargatePassword
-    );
-  }
-
   await mongoose.connect(uri, {
-    autoCreate: false,
-    autoIndex: false
+    autoCreate: true,
+    autoIndex: false,
+    username: config.astraUsername,
+    password: config.astraPassword,
+    authUrl: 'http://localhost:8081/v1/auth'
   });
+  await Promise.all(Object.values(mongoose.connection.models).map(Model => Model.init()));
   return conn;
 };

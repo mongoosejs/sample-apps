@@ -111,3 +111,5 @@ stargate-mongoose
 
 # config
 config.json
+
+netlify-functions-ecommerce/frontend/public/app.js
