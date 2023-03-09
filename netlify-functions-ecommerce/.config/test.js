@@ -1,23 +1,11 @@
 'use strict';
 
-const assert = require('assert');
-
-const astraUri = process.env.ASTRA_URI;
-
-if (!astraUri) {
-  assert.ok(process.env.STARGATE_BASE_URL, 'Must set STARGATE_BASE_URL environment variable');
-  assert.ok(process.env.STARGATE_AUTH_URL, 'Must set STARGATE_AUTH_URL environment variable');
-  assert.ok(process.env.STARGATE_USERNAME, 'Must set STARGATE_BASE_URL environment variable');
-  assert.ok(process.env.STARGATE_PASSWORD, 'Must set STARGATE_BASE_URL environment variable');
-}
-
 module.exports = Object.freeze({
-  stargateBaseUrl: process.env.STARGATE_BASE_URL,
-  stargateAuthUrl: process.env.STARGATE_AUTH_URL,
-  stargateUsername: process.env.STARGATE_USERNAME,
-  stargatePassword: process.env.STARGATE_PASSWORD,
-  astraUri: process.env.ASTRA_URI,
+  stargateJSONUri: 'http://127.0.0.1:8080/v1/ecommerce_test',
+  stargateJSONUsername: 'cassandra',
+  stargateJSONPassword: 'cassandra',
+  stargateJSONAuthUrl: 'http://localhost:8081/v1/auth',
   stripeSecretKey: 'test',
-  stripeSuccessUrl: 'localhost:3000/success',
-  stripeCancelUrl: 'localhost:3000/cancel'
+  stripeSuccessUrl: 'http://localhost:8888/order-confirmation',
+  stripeCancelUrl: 'http://localhost:8888/cart'
 });

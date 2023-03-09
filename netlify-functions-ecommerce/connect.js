@@ -13,15 +13,14 @@ module.exports = async function connect() {
   }
   conn = mongoose.connection;
 
-  let uri = config.astraUri;
+  let uri = config.stargateJSONUri;
 
   await mongoose.connect(uri, {
-    autoCreate: true,
-    autoIndex: false,
-    username: config.astraUsername,
-    password: config.astraPassword,
-    authUrl: 'http://localhost:8081/v1/auth'
+    username: config.stargateJSONUsername,
+    password: config.stargateJSONPassword,
+    authUrl: config.stargateJSONAuthUrl
   });
+  
   await Promise.all(Object.values(mongoose.connection.models).map(Model => Model.init()));
   return conn;
 };

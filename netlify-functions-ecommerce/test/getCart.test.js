@@ -7,7 +7,8 @@ const fixtures = require('./fixtures');
 
 describe('Get the cart given an id', function() {
   it('Should create a cart and then find the cart.', async function() {
-    const cart = await fixtures.createCart({ products: null });
+    const { cart } = await fixtures.createCart({});
+
     const params = {
       queryStringParameters: {
         cartId: cart._id
@@ -15,5 +16,7 @@ describe('Get the cart given an id', function() {
     };
     const findCart = await getCart(params);
     assert.equal(findCart.statusCode, 200);
+    findCart.body = JSON.parse(findCart.body);
+    assert.equal(findCart.body.cart._id, cart._id.toString());
   });
 });
