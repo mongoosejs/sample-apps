@@ -37,19 +37,12 @@ describe('Checkout', function() {
     sinon.stub(stripe.paymentIntents, 'retrieve').returns({ status: 'succeeded', id: '123', brand: 'visa', last4: '1234' });
     sinon.stub(stripe.paymentMethods, 'retrieve').returns({ status: 'succeeded', id: '123', brand: 'visa', last4: '1234' });
     sinon.stub(stripe.checkout.sessions, 'create').returns({ status: 'succeeded', id: '123', brand: 'visa', last4: '1234' });
-    params.body.product = params.body.items;
-    params.body.name = 'Test Testerson';
-    params.body.email = 'test@localhost.com';
-    params.body.address1 = '12345 Syndey Street';
-    params.body.city = 'Miami';
-    params.body.state = 'Florida';
-    params.body.zip = '33145';
-    params.body.shipping = 'standard';
+    
     params.body = JSON.stringify(params.body);
 
     const finish = await checkout(params);
     finish.body = JSON.parse(finish.body);
-    assert(finish.body.order);
     assert(finish.body.cart);
+    assert(finish.body.url);
   });
 });
