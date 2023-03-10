@@ -11,10 +11,10 @@ const stripe = require('../integrations/stripe');
 describe('Checkout', function() {
   this.timeout(10000);
 
-  it('Should do a successful checkout run', async function() {
+  it('should do a successful checkout run', async function() {
     const products = await fixtures.createProducts({
       product: [
-        { name: 'A Test Products', price: 500 },
+        { name: 'A Test Product', price: 500 },
         { name: 'Another Test Product', price: 600 }
       ]
     }).then((res) => res.products);
@@ -43,6 +43,7 @@ describe('Checkout', function() {
     const finish = await checkout(params);
     finish.body = JSON.parse(finish.body);
     assert(finish.body.cart);
+    assert.equal(finish.body.cart.total, 1600);
     assert(finish.body.url);
   });
 });
