@@ -7,11 +7,7 @@ Official sample apps for [stargate-mongoose](https://npmjs.com/package/stargate-
 Each directory contains an isolated sample Node.js application.
 The following is a list of available sample apps.
 
-* [discord-bot](discord-bot)
 * [netlify-functions-ecommerce](netlify-functions-ecommerce)
-* [typescript-express-reviews](typescript-express-reviews)
-
-We recommend trying the [netlify-functions-ecommerce](netlify-functions-ecommerce) app first.
 
 ## Prerequisites
 
