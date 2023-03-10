@@ -31,7 +31,7 @@ const handler = async(event) => {
       total = total + (product.price * cart.items[i].quantity);
     }
 
-    cart.total = +(total / 100).toFixed(2);
+    cart.total = total;
 
     if (config.stripeSecretKey === 'test') {
       await cart.save();
