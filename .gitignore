@@ -113,3 +113,4 @@ stargate-mongoose
 config.json
 
 netlify-functions-ecommerce/frontend/public/app.js
+typescript-express-reviews/.env
