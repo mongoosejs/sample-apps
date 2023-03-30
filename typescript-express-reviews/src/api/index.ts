@@ -6,7 +6,7 @@ import express from 'express';
 import register from './User/register';
 import login from './User/login';
 import create from './Review/create';
-import last5 from './Vehicle/findById';
+import findById from './Vehicle/findById';
 import findByVehicle from './Review/findByVehicle';
 import bodyParser from 'body-parser';
 import connect from '../models/connect';
@@ -29,8 +29,8 @@ void async function main() {
   app.putAsync('/register', register);
   app.putAsync('/login', login);
   app.postAsync('/review/create', create);
-  app.getAsync('/vehicle/recent/reviews', last5);
-  app.getAsync('/vehicle/reviews', findByVehicle);
+  app.getAsync('/vehicle/find-by-id', findById);
+  app.getAsync('/review/find-by-vehicle', findByVehicle);
 
   await app.listen(port);
   console.log('Listening on port ' + port);

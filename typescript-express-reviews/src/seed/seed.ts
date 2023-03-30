@@ -4,8 +4,9 @@ dotenv.config();
 import connect from '../models/connect';
 import mongoose from 'mongoose';
 
-import User from '../models/user';
 import Authentication from '../models/authentication';
+import Review from '../models/review';
+import User from '../models/user';
 import Vehicle from '../models/vehicle';
 import bcrypt from 'bcryptjs';
 
@@ -48,7 +49,7 @@ async function run() {
       secret: await bcrypt.hash(users[i].firstName.toLowerCase(), 10)
     });
   }
-  await Vehicle.create([
+  const vehicles = await Vehicle.create([
     {
       _id: '0'.repeat(24),
       make: 'Tesla',
@@ -72,6 +73,21 @@ async function run() {
       ],
       numReviews: 0,
       averageReviews: 0
+    }
+  ]);
+
+  await Review.create([
+    {
+      vehicleId: vehicles[1]._id,
+      userId: users[0]._id,
+      text: 'When you live your life a quarter of a mile at a time, it ain\'t just about being fast. I needed a 10 second car, and this car delivers.',
+      rating: 4
+    },
+    {
+      vehicleId: vehicles[0]._id,
+      userId: users[1]._id,
+      text: 'I need NOS. My car topped out at 140 miles per hour this morning.',
+      rating: 3
     }
   ]);
 

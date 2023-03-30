@@ -12,6 +12,21 @@ Make sure you have a local stargate instance running as described on the [main p
 1. Run `npm run seed`
 1. Run `npm run build` to build the example
 1. Run `npm start`
-1. Visit `http://localhost:3000/vehicle/reviews?_id=000000000000000000000000` to see a vehicle
+1. Visit `http://localhost:3000/review/find-by-vehicle?vehicleId=111111111111111111111111` to see the reviews for a vehicle. You should see the following JSON output:
 
-- `/status`
+```
+{
+  "reviews": [
+    {
+      "_id": "6425a0ca8f330d09e7767e14",
+      "rating": 4,
+      "text": "When you live your life a quarter of a mile at a time, it ain't just about being fast. I needed a 10 second car, and this car delivers.",
+      "userId": "6425a0ca8f330d09e7767e0e",
+      "vehicleId": "111111111111111111111111",
+      "createdAt": "2023-03-30T14:46:34.451Z",
+      "updatedAt": "2023-03-30T14:46:34.451Z",
+      "__v": 0
+    }
+  ]
+}
+```

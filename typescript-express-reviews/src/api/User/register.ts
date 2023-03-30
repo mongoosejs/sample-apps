@@ -3,9 +3,15 @@ import Authentication from '../../models/authentication';
 import User from '../../models/user';
 import bcrypt from 'bcryptjs';
 
-async function register(request: Request, response: Response) {
-  if (!request.body) return response.status(500).json({ error: 'No body was sent' });
-  if (request.body.password.length < 6) return response.status(500).json({ error: 'password is too short' });
+async function register(request: Request, response: Response): Promise<void> {
+  if (!request.body) {
+    response.status(500).json({ error: 'No body was sent' });
+    return;
+  }
+  if (request.body.password.length < 6) {
+    response.status(500).json({ error: 'password is too short' });
+    return;
+  }
 
   const user = await User.create({
     firstName: request.body.firstName,
