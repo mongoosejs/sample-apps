@@ -109,8 +109,5 @@ yarn.lock
 astra-mongoose
 stargate-mongoose
 
-# config
-config.json
-
 netlify-functions-ecommerce/frontend/public/app.js
 discord-bot/.env

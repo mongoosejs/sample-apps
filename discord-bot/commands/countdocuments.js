@@ -1,7 +1,7 @@
 'use strict';
 
 const { SlashCommandBuilder } = require('discord.js');
-const Bot = require('../models/bot')
+const Bot = require('../models/bot');
 
 module.exports = {
   data: new SlashCommandBuilder().setName('count').setDescription('counts documents in the database'),

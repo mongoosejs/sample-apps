@@ -4,7 +4,7 @@ require('dotenv').config();
 
 // Require the necessary discord.js classes
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
-const { token } = require('./config.json');
+const assert = require('assert');
 const fs = require('fs');
 const path = require('node:path');
 const mongoose = require('./mongoose');
@@ -16,6 +16,11 @@ client.commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
+const {
+  DISCORD_TOKEN: token
+} = process.env;
+assert.ok(token, 'Must set DISCORD_TOKEN environment variable');
+
 for (const file of commandFiles) {
   const filePath = path.join(commandsPath, file);
   const command = require(filePath);
@@ -25,7 +30,7 @@ for (const file of commandFiles) {
 }
 
 // When the client is ready, run this code (only once)
-client.once('ready', async () => {
+client.once('ready', async() => {
   console.log('Ready!');
 });
 
