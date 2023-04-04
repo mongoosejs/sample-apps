@@ -10,6 +10,9 @@
     "start": "ts-node src/api",
     "test": "ts-mocha tests/*.test.ts"
   },
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "dependencies": {
     "@awaitjs/express": "0.9.0",
     "bcryptjs": "^2.4.3",
