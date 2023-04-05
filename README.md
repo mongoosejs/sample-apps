@@ -9,10 +9,11 @@ The following is a list of available sample apps.
 
 * [netlify-functions-ecommerce](netlify-functions-ecommerce)
 * [discord-bot](discord-bot)
+* [typescript-express-reviews](typescript-express-reviews)
 
 ## Prerequisites
 
-In order to run these demos, you'll need to have [Node.js](https://nodejs.org) and  installed. 
+In order to run these demos, you'll need to have [Node.js](https://nodejs.org) 14 or higher installed. 
 
 You'll also need to run a copy of the Stargate infrastructure stack including the JSON API. 
 The simplest way to do this is by using the script found under the [bin](bin) directory 
