@@ -8,6 +8,7 @@ Each directory contains an isolated sample Node.js application.
 The following is a list of available sample apps.
 
 * [netlify-functions-ecommerce](netlify-functions-ecommerce)
+* [discord-bot](discord-bot)
 
 ## Prerequisites
 
