@@ -15,6 +15,8 @@ async function findByVehicle (request: Request, response: Response): Promise<voi
     sort({ createdAt: -1 }).
     skip(skip).
     limit(limit).
+    populate('user').
+    populate('vehicle').
     setOptions({ sanitizeFilter: true });
   response.status(200).json({ reviews: reviews });
   return;
