@@ -95,6 +95,10 @@ describe('Review', function() {
 
     const reviews = res.json.getCall(0).args[0].reviews;
     assert.equal(reviews.length, 3);
+    assert.deepEqual(
+      reviews.map((r: typeof Review) => r.rating),
+      [5, 4, 3]
+    );
 
     // Test that populate worked
     assert.equal(reviews[0].vehicle.make, 'Tesla');
