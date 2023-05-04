@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = Object.freeze({
-  jsonApiUrl: 'http://localhost:8080/v1/ecommerce_test',
+  jsonApiUrl: 'http://localhost:8181/v1/ecommerce_test',
   jsonApiConnectOptions: {
     username: 'cassandra',
     password: 'cassandra',
