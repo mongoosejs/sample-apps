@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = Object.freeze({
-  jsonApiUrl: 'https://xyz.apps.astra.datastax.com/api/json/v1/my-keyspace?applicationToken=AstraCS:my-application-token',
+  jsonApiUrl: process.env.JSON_API_URL,
   jsonApiConnectOptions: {
     isAstra: true
   },
