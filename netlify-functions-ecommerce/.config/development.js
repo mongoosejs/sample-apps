@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = Object.freeze({
-  stargateJSONUri: 'http://127.0.0.1:8080/v1/ecommerce',
+  stargateJSONUri: 'http://127.0.0.1:8181/v1/ecommerce',
   stargateJSONUsername: 'cassandra',
   stargateJSONPassword: 'cassandra',
   stargateJSONAuthUrl: 'http://localhost:8081/v1/auth',

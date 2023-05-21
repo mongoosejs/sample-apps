@@ -89,7 +89,7 @@ describe('Review', function() {
     vehicle.numReviews = 6;
     vehicle.averageReview = 3;
     await vehicle.save();
-    const req = mockRequest({ vehicleId: vehicle._id, limit: 3, skip: 2 });
+    const req = mockRequest({ vehicleId: vehicle._id, limit: 3, skip: 1 });
     const res = mockResponse();
     await findByVehicle(req, res);
 
@@ -97,7 +97,7 @@ describe('Review', function() {
     assert.equal(reviews.length, 3);
     assert.deepEqual(
       reviews.map((r: typeof Review) => r.rating),
-      [5, 4, 3]
+      [4, 3, 2]
     );
 
     // Test that populate worked
