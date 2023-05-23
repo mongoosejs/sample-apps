@@ -15,6 +15,8 @@ async function last5(request: Request, response: Response): Promise<void> {
     find({ vehicleId: request.query._id }).
     sort({ createdAt: -1 }).
     limit(limit).
+    populate('user').
+    populate('vehicle').
     setOptions({ sanitizeFilter: true });
 
   response.status(200).json({
