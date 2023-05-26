@@ -26,7 +26,7 @@ jobs:
       - name: Set up JSON API
         run: |
           chmod +x bin/start_json_api.sh
-          bin/start_json_api.sh -t v2.0.9 -j v1.0.0-ALPHA-4
+          bin/start_json_api.sh -t v2.12 -j v1.0.0-ALPHA-6
         working-directory: stargate-mongoose
       - name: Wait for services
         run: |
