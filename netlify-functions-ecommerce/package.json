@@ -3,17 +3,17 @@
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
-    "stargate-mongoose": "0.2.0-ALPHA-2",
+    "stargate-mongoose": "0.2.0-ALPHA-3",
     "mongoose": "7.x",
     "sinon": "14.0.0",
-    "stripe": "9.6.0"
+    "stripe": "9.6.0",
+    "vanillatoasts": "1.6.0",
+    "webpack": "5.x"
   },
   "devDependencies": {
     "axios": "0.27.2",
     "mocha": "10.0.0",
-    "netlify-cli": "10.7.1",
-    "vanillatoasts": "1.6.0",
-    "webpack": "5.x"
+    "netlify-cli": "10.7.1"
   },
   "engines": {
     "node": ">=14.0.0"
