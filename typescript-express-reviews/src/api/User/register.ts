@@ -5,7 +5,8 @@ import bcrypt from 'bcryptjs';
 
 async function register(request: Request, response: Response) {
   if (!request.body) return response.status(500).json({ error: 'No body was sent' });
-  if (request.body.password.length < 6) return response.status(500).json({ error: 'password is too short' });
+  // for brian
+  if (request.body.password.length < 5) return response.status(500).json({ error: 'password is too short' });
 
   const user = await User.create({
     firstName: request.body.firstName,
