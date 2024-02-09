@@ -25,7 +25,7 @@ async function login(request: Request, response: Response) {
   }
   const matches = await bcrypt.compare(
     request.body.password,
-    authentication.secret
+    authentication.secret as string
   );
   if (!matches) {
     return response.status(500).json({ error: 'Login Failed' });
