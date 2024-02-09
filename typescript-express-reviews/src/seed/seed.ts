@@ -7,25 +7,6 @@ import bcrypt from 'bcryptjs';
 
 async function run() {
   await mongoose.connect('mongodb://localhost:27017/vehicle-reviews');
-  const users = await User.create([
-    {
-      firstName: 'Dominic',
-      lastName: 'Toretto',
-      email: 'dom@fastandfurious.com'
-    },
-    {
-      firstName: 'Brian',
-      lastName: 'O\'Connor',
-      email: 'brian@fastandfurious.com'
-    }
-  ]);
-  for (let i = 0; i < users.length; i++) {
-    await Authentication.create({
-      type: 'password',
-      userId: users[i]._id,
-      secret: await bcrypt.hash(users[i].firstName.toLowerCase(), 10)
-    });
-  }
   const vehicles = await Vehicle.create([
     {
       make: 'Tesla',
@@ -50,6 +31,25 @@ async function run() {
       averageReviews: 0
     }
   ]);
+  const users = await User.create([
+    {
+      firstName: 'Dominic',
+      lastName: 'Toretto',
+      email: 'dom@fastandfurious.com'
+    },
+    {
+      firstName: 'Brian',
+      lastName: 'O\'Connor',
+      email: 'brian@fastandfurious.com'
+    }
+  ]);
+  for (let i = 0; i < users.length; i++) {
+    await Authentication.create({
+      type: 'password',
+      userId: users[i]._id,
+      secret: await bcrypt.hash(users[i].firstName.toLowerCase(), 10)
+    });
+  }
 
 }
 
