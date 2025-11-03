@@ -6,9 +6,14 @@ const { token } = require('./config.json');
 const fs = require('fs');
 const path = require('node:path');
 const mongoose = require('mongoose');
+const express = require('express');
+const studio = require('@mongoosejs/studio/express');
 
+const app = express();
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+
+
 
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');
@@ -45,8 +50,13 @@ client.on('interactionCreate', async interaction => {
 run();
 
 async function run() {
-// connect to mongoose
+	// connect to mongoose
 	await mongoose.connect('mongodb://localhost:27017');
-// Login to Discord with your client's token
+	app.use('/studio',  await studio('/studio/api', mongoose));
+	app.listen(3000, () => {
+		console.log('Server is running on port 3000');
+	});
+
+	// Login to Discord with your client's token
 	client.login(token);
 }
