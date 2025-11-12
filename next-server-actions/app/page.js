@@ -5,7 +5,7 @@ await mongoose.connect('mongodb://127.0.0.1:27017/mongoose_test');
 
 const userSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true, trim: true }
+    name: { type: String, required: true, trim: true, minLength: 6 }
   },
   { timestamps: true }
 );

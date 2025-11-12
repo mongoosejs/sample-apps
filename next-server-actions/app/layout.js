@@ -8,8 +8,7 @@ export default function RootLayout({
   children,
 }) {
   return (
-    <html lang="en">   {/* required in root layout */}
-      <body>{children}</body>   {/* required in root layout */}
+    <html lang="en"><body>{children}</body>
     </html>
   );
 }
