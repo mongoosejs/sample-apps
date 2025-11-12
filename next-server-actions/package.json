@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@mongoosejs/studio": "^0.1.4",
+    "mongoose": "^8.19.3",
+    "next": "^16.0.2"
+  },
+  "scripts": {
+    "start": "next dev"
+  }
+}
