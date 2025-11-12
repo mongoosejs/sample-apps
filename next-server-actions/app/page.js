@@ -4,7 +4,9 @@ import { revalidatePath } from 'next/cache';
 await mongoose.connect('mongodb://127.0.0.1:27017/mongoose_test');
 
 const userSchema = new mongoose.Schema(
-  { name: { type: String, required: true, trim: true } },
+  {
+    name: { type: String, required: true, trim: true }
+  },
   { timestamps: true }
 );
 
@@ -39,7 +41,7 @@ export default async function Page() {
       <ul style={{ paddingLeft: '1rem' }}>
         {users.map((u) => (
           <li key={u._id} style={{ margin: '0.25rem 0' }}>
-            {u.name} ({u.emailAddress})
+            {u.name}
           </li>
         ))}
       </ul>
