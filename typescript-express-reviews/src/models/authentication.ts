@@ -7,11 +7,10 @@ const schema = new mongoose.Schema({
     enum: ['password', 'one time'],
     default: 'password'
   },
-  userId: { type: mongoose.Types.ObjectId, required: true },
+  userId: { type: mongoose.Schema.Types.ObjectId, required: true },
   secret: { type: String, required: true }
 });
 
 const Authentication = mongoose.model('Authentication', schema);
 
 export default Authentication;
-

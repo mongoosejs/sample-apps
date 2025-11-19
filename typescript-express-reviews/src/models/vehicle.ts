@@ -10,9 +10,9 @@ const schema = new mongoose.Schema({
     required: true
   },
   year: {
-    type: String,
+    type: Number,
     required: true,
-    validate: v => v >= 1950
+    validate: (v: number) => Number.isInteger(v) && v >= 1950
   },
   images: {
     type: [String]

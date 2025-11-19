@@ -4,16 +4,18 @@
   "authors": "Valeri Karpov <val@karpov.io>",
   "version": "1.0.0",
   "license": "MIT",
+  "engines": {
+    "node": ">=20.6.0"
+  },
   "scripts": {
     "build": "tsc",
-    "start": "env NODE_ENV=local ts-node src/api",
-    "test": "env NODE_ENV=test ts-mocha tests/*.test.ts",
-    "seed": "env NODE_ENV=local ts-node src/seed/seed.ts"
+    "start": "node --env-file=.env ./node_modules/.bin/ts-node src/api",
+    "test": "node --env-file=.env.test ./node_modules/.bin/ts-mocha tests/*.test.ts",
+    "seed": "node --env-file=.env ./node_modules/.bin/ts-node src/seed/seed"
   },
   "dependencies": {
     "@types/body-parser": "^1.19.2",
     "bcryptjs": "^2.4.3",
-    "dotenv": "16.0.1",
     "express": "4.x",
     "mongoose": "^9.0.0-0",
     "sinon": "^14.0.0"
