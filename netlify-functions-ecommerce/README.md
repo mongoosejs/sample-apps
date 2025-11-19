@@ -9,17 +9,16 @@ Other tools include:
 
 ## Running This Example
 
-1. Make sure you have a MongoDB instance running on `localhost:27017`, or update `mongodbUri` in `.config/development.js` to your MongoDB server's address.
-2. Run `npm install`
-3. Run `npm run seed`
-4. Run `npm start`
-5. Visit `http://localhost:8888/.netlify/functions/getProducts` to list all available products
-6. Run `npm run test:smoke` to run a smoke test against `http://localhost:8888` that creates a cart using [Axios](https://masteringjs.io/axios).
-7. Run other endpoints using curl or postman
+1. Make sure you have a MongoDB instance running on `localhost:27017`, or copy an Atlas connection string
+2. `cp .env.example .env` and update `MONGODB_CONNECTION_STRING` and `STRIPE_SECRET_KEY` (if you have one)
+3. Run `npm install`
+4. Run `npm run seed`
+5. Run `npm start`
+6. Visit `http://localhost:8888` to view the app
 
 ## Testing
 
-Make sure you have a MongoDB instance running on `localhost:27017`, or update `mongodbUri` in `.config/test.js` to your MongoDB server's address.
+Make sure you have a MongoDB instance running on `localhost:27017`, or update the `MONGODB_CONNECTION_STRING` variable in `.env.test`.
 Then run `npm test`.
 
 ```sh

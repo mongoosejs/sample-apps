@@ -9,10 +9,12 @@ const sinon = require('sinon');
 const stripe = require('../integrations/stripe');
 
 describe('Checkout', function() {
-  it('Should do a successful checkout run', async function() {
+  this.timeout(10000);
+
+  it('should do a successful checkout run', async function() {
     const products = await fixtures.createProducts({
       product: [
-        { name: 'A Test Products', price: 500 },
+        { name: 'A Test Product', price: 500 },
         { name: 'Another Test Product', price: 600 }
       ]
     }).then((res) => res.products);
@@ -30,22 +32,24 @@ describe('Checkout', function() {
     result.body = JSON.parse(result.body);
     assert(result.body);
     assert(result.body.items.length);
+
     params.body.cartId = result.body._id;
     sinon.stub(stripe.paymentIntents, 'retrieve').returns({ status: 'succeeded', id: '123', brand: 'visa', last4: '1234' });
     sinon.stub(stripe.paymentMethods, 'retrieve').returns({ status: 'succeeded', id: '123', brand: 'visa', last4: '1234' });
-    sinon.stub(stripe.checkout.sessions, 'create').returns({ status: 'succeeded', id: '123', brand: 'visa', last4: '1234' });
-    params.body.product = params.body.items;
-    params.body.name = 'Test Testerson';
-    params.body.email = 'test@localhost.com';
-    params.body.address1 = '12345 Syndey Street';
-    params.body.city = 'Miami';
-    params.body.state = 'Florida';
-    params.body.zip = '33145';
-    params.body.shipping = 'standard';
+    sinon.stub(stripe.checkout.sessions, 'create').returns({
+      status: 'succeeded',
+      id: '123',
+      brand: 'visa',
+      last4: '1234',
+      url: 'test-checkout-url'
+    });
+
     params.body = JSON.stringify(params.body);
+
     const finish = await checkout(params);
     finish.body = JSON.parse(finish.body);
-    assert(finish.body.order);
     assert(finish.body.cart);
+    assert.equal(finish.body.cart.total, 1600);
+    assert.equal(finish.body.url, 'test-checkout-url');
   });
 });

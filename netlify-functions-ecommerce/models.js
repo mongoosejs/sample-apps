@@ -41,6 +41,10 @@ const cartSchema = new mongoose.Schema({
     quantity: { type: Number, required: true }
   }],
   orderId: { type: mongoose.ObjectId, ref: 'Order' },
+  total: {
+    type: Number,
+    default: 0
+  },
   stripeSessionId: { type: String }
 }, { timestamps: true });
 
