@@ -4,15 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./index.js"
+    "postinstall": "touch .env",
+    "test": "node --env-file=.env.test ./node_modules/mocha/bin/mocha test/*.js",
+    "seed": "node --env-file=.env ./seed",
+    "start": "node --env-file=.env ./index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@discordjs/rest": "^1.1.0",
-    "@sapphire/framework": "^3.1.1",
-    "discord.js": "^14.3.0",
-    "mongoose": "^6.6.1"
+    "@discordjs/rest": "2.6.0",
+    "@masteringjs/eslint-config": "0.1.1",
+    "discord.js": "14.24.0",
+    "mongoose": "^9.0.0-0"
   }
 }
