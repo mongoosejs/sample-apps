@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
-    "mongoose": "6.3.5",
-    "sinon": "14.0.0",
-    "stripe": "9.6.0"
+    "dotenv": "17.2.3",
+    "mongoose": "^9.0.0-0",
+    "sinon": "21.0.0",
+    "stripe": "19.1.0",
+    "vanillatoasts": "1.6.0",
+    "webpack": "5.x"
   },
   "devDependencies": {
     "axios": "0.27.2",
@@ -13,8 +16,9 @@
     "netlify-cli": "10.7.1"
   },
   "scripts": {
+    "build": "node --env-file .env ./frontend/build",
     "seed": "env NODE_ENV=local node ./seed",
-    "start": "env NODE_ENV=local netlify dev",
+    "start": "env NODE_ENV=local netlify dev --dir public --functions netlify/functions",
     "test": "env NODE_ENV=test mocha ./test/*.test.js",
     "test:smoke": "node ./smoke-test"
   }

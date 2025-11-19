@@ -1,0 +1,40 @@
+<div class="home">
+  <div class="hero">
+    <div class="image-bg">
+      <img src="/images/woman-with-iphone.png">
+    </div>
+    <h1>
+      Get the Latest iPhones<br>at the Best Prices 
+    </h1>
+    <router-link to="/products">
+      <button>Shop Now!</button>
+    </router-link>
+  </div>
+  <div>
+    <h2>iPhones For You</h2>
+
+    <div class="iphone-container">
+      <div v-for="product in state.products" class="iphone">
+        <div class="image-wrapper">
+          <router-link :to="'/products/' + product._id">
+            <img :src="product.image">
+          </router-link>
+        </div>
+        <div class="info-wrapper">
+          <router-link :to="'/products/' + product._id">
+            {{product.name}}
+          </router-link>
+          <div class="price">
+            {{formatPrice(product.price)}}
+          </div>
+        </div>
+        <div class="add-to-cart">
+          <button @click="addToCart(product)" :disabled="submitting === product">
+            <span v-if="submitting !== product">Add to Cart</span>
+            <span v-else><img src="/images/loader.gif"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

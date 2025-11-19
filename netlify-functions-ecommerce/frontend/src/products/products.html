@@ -1,0 +1,28 @@
+<div class="products">
+  <h1>All Products</h1>
+  <div class="iphone-container">
+    <div v-for="product in state.products" class="iphone">
+      <div class="image-wrapper">
+        <router-link :to="'/products/' + product._id">
+          <img :src="product.image">
+        </router-link>
+      </div>
+      <div class="info-wrapper">
+        <div>
+          <router-link :to="'/products/' + product._id">
+            {{product.name}}
+          </router-link>
+        </div>
+        <div class="price">
+          {{formatPrice(product.price)}}
+        </div>
+      </div>
+      <div class="add-to-cart">
+        <button @click="addToCart(product)" :disabled="submitting === product">
+          <span v-if="submitting !== product">Add to Cart</span>
+          <span v-else><img src="/images/loader.gif"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+.product .product-wrapper {
+  display: flex;
+  gap: 20px;
+}
+
+.product .breadcrumbs {
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 1em;
+}
+
+.product .breadcrumbs a {
+  color: #666;
+}
+
+.product .product-wrapper .product-image {
+  width: 50%;
+  background-color: #ddd;
+}
+
+.product .product-wrapper .product-image img {
+  width: 100%;
+}
+
+.product .product-wrapper .product-description {
+  width: 50%;
+}
+
+.product .product-description .name {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+.product .product-description .price {
+  margin-bottom: 1em;
+  font-weight: bold;
+}
+
+.product .product-description .description {
+  line-height: 1.5em;
+  margin-bottom: 1em;
+}
+
+.product .product-description button {
+  font-size: 1.5em;
+}

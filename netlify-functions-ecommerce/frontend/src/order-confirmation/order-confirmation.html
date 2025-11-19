@@ -1,0 +1,29 @@
+<div class="order-confirmation">
+  <div v-if="order">
+    <h1>Your Order is Confirmed</h1>
+    <div class="order-info">
+      <div class="order-detail">
+        <div class="subheader">
+          Total
+        </div>
+        <div>
+          ${{order.total.toFixed(2)}}
+        </div>
+      </div>
+      <div class="order-detail">
+        <div class="subheader">
+          Payment Method
+        </div>
+        <div>
+          {{order.paymentMethod.brand}} ending in {{order.paymentMethod.last4}}
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <router-link to="/">
+        <button>Back to Store</button>
+      </router-link>
+    </div>
+  </div>
+</div>
