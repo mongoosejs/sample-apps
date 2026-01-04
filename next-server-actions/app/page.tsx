@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { revalidatePath } from 'next/cache';
 
-await mongoose.connect('mongodb://127.0.0.1:27017/mongoose_test');
+mongoose.connect('mongodb://127.0.0.1:27017/mongoose_test');
 
 const userSchema = new mongoose.Schema(
   {
@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema(
 const User = mongoose.model('User', userSchema, 'users', { overwriteModels: true });
 
 // --- Server Action ---
-async function addUser(formData) {
+async function addUser(formData: FormData) {
   'use server';
   const name = String(formData.get('name') || '').trim();
   await User.create({ name });
@@ -40,7 +40,7 @@ export default async function Page() {
 
       <ul style={{ paddingLeft: '1rem' }}>
         {users.map((u) => (
-          <li key={u._id} style={{ margin: '0.25rem 0' }}>
+          <li key={u._id?.toString() ?? ''} style={{ margin: '0.25rem 0' }}>
             {u.name}
           </li>
         ))}
